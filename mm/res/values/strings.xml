@@ -4,4 +4,5 @@
     <string name="app_name">MM+</string>
 	<string name="mm_all_desp">mm all</string>
 	<string name="mm_webview_desp">mm webview</string>
+	<string name="mm_main_list_desp">mm 主列表</string>
 </resources>
