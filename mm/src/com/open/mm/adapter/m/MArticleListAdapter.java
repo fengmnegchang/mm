@@ -58,6 +58,7 @@ public class MArticleListAdapter extends CommonAdapter<MArticleBean>{
 		}
 		final MArticleBean bean = (MArticleBean) getItem(position);
 		if (bean != null) {
+			viewHolder.text_camLiDes.setText(bean.getPostmeta());
 			viewHolder.text_title.setText(bean.getAlt());
 			if (bean.getDataimg()!= null && bean.getDataimg().length() > 0) {
 				DisplayImageOptions options = new DisplayImageOptions.Builder().showStubImage(R.drawable.default_img).showImageForEmptyUri(R.drawable.default_img).showImageOnFail(R.drawable.default_img)
