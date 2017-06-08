@@ -23,6 +23,7 @@ import android.util.Log;
 
 import com.open.android.jsoup.CommonService;
 import com.open.mm.bean.m.MArticleBean;
+import com.open.mm.utils.EscapeUnescapeUtils;
 import com.open.mm.utils.UrlUtils;
 
 /**
@@ -44,12 +45,15 @@ public class MArticleJsoupService extends CommonService {
 			// {
 			// }
 			// });
-//			if (pageNo > 1) {
-//				href = href + "p" + pageNo;
-//			}
+			Document doc;
+			if (pageNo > 1) {
+				doc = Jsoup.parse(href);
+			}else{
+				doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			}
 			Log.i(TAG, "url = " + href);
 
-			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
 			// System.out.println(doc.toString());
 			try {
 				/**
@@ -82,6 +86,9 @@ public class MArticleJsoupService extends CommonService {
 									Element aElement = moduleElements.get(i).select("a").first();
 									if (aElement != null) {
 										String hrefa = aElement.attr("href");
+										if(!hrefa.contains(UrlUtils.MM_M)){
+											hrefa = UrlUtils.MM_M+hrefa;
+										}
 										Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
 										sbean.setHref(hrefa);
 									}
@@ -105,6 +112,9 @@ public class MArticleJsoupService extends CommonService {
 									Element imgElement = moduleElements.get(i).select("img").first();
 									if (imgElement != null) {
 										String alt = imgElement.attr("alt");
+										if(alt.contains("%u")){
+											alt = EscapeUnescapeUtils.unescape(alt);
+										}
 										Log.i(TAG, "i==" + i + ";alt==" + alt);
 										sbean.setAlt(alt);
 									}

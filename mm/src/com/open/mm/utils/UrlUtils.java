@@ -26,5 +26,7 @@ public class UrlUtils {
 	/** 浏览器代理 **/
 	public static final String userAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36";
 	/** m mm **/
-	public static final String MM_M = "http://m.mm131.com/";
+	public static final String MM_M = "http://m.mm131.com";
+	/** m mm主页分页 **/
+	public static final String MM_M_MAIN_MORE ="http://m.mm131.com/more.php?page=";
 }
