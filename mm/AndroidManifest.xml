@@ -63,6 +63,19 @@
             android:theme="@style/Theme.PageIndicatorDefaults"
             >
         </activity>
+         <!--m搜索条件-->
+        <activity
+            android:name="com.open.mm.activity.m.MSearchEditFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_search_desp"
+            >
+        </activity>
+         <!-- mm 搜索列表 -->
+        <activity
+            android:name="com.open.mm.activity.m.MSearchArticlePullListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_search_list_desp" >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"

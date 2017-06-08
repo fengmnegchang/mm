@@ -7,4 +7,6 @@
 	<string name="mm_main_list_desp">mm 主列表</string>
 	<string name="mm_left_menu_list_desp">mm left menu</string>
 	<string name="mm_slide_menu_desp">mm slide menu</string>
+	<string name="mm_search_desp">mm search</string>
+	<string name="mm_search_list_desp">mm search列表</string>
 </resources>

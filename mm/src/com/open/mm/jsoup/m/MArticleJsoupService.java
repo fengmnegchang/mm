@@ -162,4 +162,112 @@ public class MArticleJsoupService extends CommonService {
 		}
 		return list;
 	}
+	
+	
+	public static List<MArticleBean> parseSearchList(String href, int pageNo) {
+		List<MArticleBean> list = new ArrayList<MArticleBean>();
+		try {
+			// href = makeURL(href, new HashMap<String, Object>() {
+			// {
+			// }
+			// });
+			href = href+pageNo;
+			Document doc;
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			Log.i(TAG, "url = " + href);
+
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 */
+				// Element globalnavElement =
+				// doc.select("div.adFocusHtml").first();
+				Elements moduleElements = doc.select("article.post");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						Element pElement = moduleElements.get(i);
+						if (pElement.attr("id").contains("post-")) {
+							MArticleBean sbean = new MArticleBean();
+							try {
+								try {
+									Element aElement = moduleElements.get(i).select("a").first();
+									if (aElement != null) {
+										String hrefa = aElement.attr("href");
+										if(!hrefa.contains(UrlUtils.MM_M)){
+											hrefa = UrlUtils.MM_M+hrefa;
+										}
+										Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+										sbean.setHref(hrefa);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								try {
+									Element imgElement = moduleElements.get(i).select("img").first();
+									if (imgElement != null) {
+										String src = imgElement.attr("src");
+										Log.i(TAG, "i==" + i + ";src==" + src);
+										sbean.setSrc(src);
+
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								try {
+									Element imgElement = moduleElements.get(i).select("img").first();
+									if (imgElement != null) {
+										String alt = imgElement.attr("alt");
+										if(alt.contains("%u")){
+											alt = EscapeUnescapeUtils.unescape(alt);
+										}
+										Log.i(TAG, "i==" + i + ";alt==" + alt);
+										sbean.setAlt(alt);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								try {
+									Element imgElement = moduleElements.get(i).select("img").first();
+									if (imgElement != null) {
+										String dataimg = imgElement.attr("data-img");
+										Log.i(TAG, "i==" + i + ";dataimg==" + dataimg);
+										sbean.setDataimg(dataimg);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								try {
+									Element imgElement = moduleElements.get(i).select("span.post-meta").first();
+									if (imgElement != null) {
+										String postmeta = imgElement.text();
+										Log.i(TAG, "i==" + i + ";postmeta==" + postmeta);
+										sbean.setPostmeta(postmeta);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							list.add(sbean);
+						}
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
