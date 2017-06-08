@@ -12,4 +12,5 @@
 	<string name="mm_titlebar_list_desp">mm titlebar</string>
 	<string name="mm_titlebar_search_desp">mm titlebar search</string>
 	<string name="mm_image_list_desp">mm 看图</string>
+	<string name="mm_image_pager_list_desp">mm 看图pager</string>
 </resources>

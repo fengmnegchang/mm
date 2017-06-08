@@ -29,6 +29,7 @@ import com.open.mm.bean.m.MArticleBean;
  */
 public class MArticleJson extends CommonJson {
 	private List<MArticleBean> list;
+	private int currentPosition;
 
 	public List<MArticleBean> getList() {
 		return list;
@@ -36,6 +37,14 @@ public class MArticleJson extends CommonJson {
 
 	public void setList(List<MArticleBean> list) {
 		this.list = list;
+	}
+
+	public int getCurrentPosition() {
+		return currentPosition;
+	}
+
+	public void setCurrentPosition(int currentPosition) {
+		this.currentPosition = currentPosition;
 	}
 	
 	

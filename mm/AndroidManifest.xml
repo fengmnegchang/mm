@@ -95,6 +95,12 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/mm_image_list_desp" >
         </activity>
+        <!-- mm 看图pager -->
+        <activity
+            android:name="com.open.mm.activity.m.MImagePagerAdapterFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_image_pager_list_desp" >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"
