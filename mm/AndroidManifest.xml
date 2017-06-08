@@ -76,6 +76,12 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/mm_search_list_desp" >
         </activity>
+         <!-- mm titlebar -->
+        <activity
+            android:name="com.open.mm.activity.m.MCommonTitleBarActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_titlebar_list_desp" >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"

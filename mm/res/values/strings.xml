@@ -9,4 +9,5 @@
 	<string name="mm_slide_menu_desp">mm slide menu</string>
 	<string name="mm_search_desp">mm search</string>
 	<string name="mm_search_list_desp">mm search列表</string>
+	<string name="mm_titlebar_list_desp">mm titlebar</string>
 </resources>

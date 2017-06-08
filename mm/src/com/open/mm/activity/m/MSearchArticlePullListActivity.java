@@ -15,8 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.open.android.R;
-import com.open.android.activity.common.CommonCommonFragmentActivity;
+import com.open.mm.R;
 import com.open.mm.fragment.m.MSearchArticlePullListFragmnet;
 import com.open.mm.utils.UrlUtils;
 
@@ -31,7 +30,7 @@ import com.open.mm.utils.UrlUtils;
  * @description:
  *****************************************************************************************************************************************************************************
  */
-public class MSearchArticlePullListActivity extends CommonCommonFragmentActivity{
+public class MSearchArticlePullListActivity extends MCommonTitleBarActivity{
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -57,7 +56,7 @@ public class MSearchArticlePullListActivity extends CommonCommonFragmentActivity
 	public void addfragment() {
 		// TODO Auto-generated method stub
 		Fragment fragment = MSearchArticlePullListFragmnet.newInstance(url, true);
-		getSupportFragmentManager().beginTransaction().replace(R.id.id_common_fragment, fragment).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.layout_content, fragment).commit();
 	}
 
 	public static void startMSearchArticlePullListActivity(Context context, String url) {
