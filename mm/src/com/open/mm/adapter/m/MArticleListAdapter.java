@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.open.android.activity.common.CommonWebViewActivity;
 import com.open.android.adapter.CommonAdapter;
 import com.open.mm.R;
@@ -62,7 +63,8 @@ public class MArticleListAdapter extends CommonAdapter<MArticleBean>{
 			viewHolder.text_title.setText(bean.getAlt());
 			if (bean.getDataimg()!= null && bean.getDataimg().length() > 0) {
 				DisplayImageOptions options = new DisplayImageOptions.Builder().showStubImage(R.drawable.default_img).showImageForEmptyUri(R.drawable.default_img).showImageOnFail(R.drawable.default_img)
-						.cacheInMemory().cacheOnDisc().build();
+//						.cacheInMemory().cacheOnDisc().build();
+				.cacheInMemory().cacheOnDisc().imageScaleType(ImageScaleType.EXACTLY_STRETCHED).build();
 				ImageLoader.getInstance().displayImage(bean.getDataimg(), viewHolder.imageview, options, getImageLoadingListener());
 			}
 

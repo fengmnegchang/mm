@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.open.android.activity.common.CommonWebViewActivity;
 import com.open.android.adapter.CommonAdapter;
 import com.open.mm.R;
+import com.open.mm.activity.m.MArticlePullListActivity;
 import com.open.mm.bean.m.MSlideMenuBean;
 
 /**
@@ -59,7 +60,8 @@ public class MSlideMenuAdapter extends CommonAdapter<MSlideMenuBean> {
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					CommonWebViewActivity.startCommonWebViewActivity(mContext, bean.getHref());
+//					CommonWebViewActivity.startCommonWebViewActivity(mContext, bean.getHref());
+					MArticlePullListActivity.startMArticlePullListActivity(mContext, bean.getHref());
 				}
 			});
 
