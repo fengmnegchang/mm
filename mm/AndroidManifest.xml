@@ -82,6 +82,13 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/mm_titlebar_list_desp" >
         </activity>
+         <!--m titlebar搜索条件-->
+        <activity
+            android:name="com.open.mm.activity.m.MCommonTitleBarSearchEditFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_titlebar_search_desp"
+            >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"

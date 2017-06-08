@@ -2,7 +2,7 @@
  *****************************************************************************************************************************************************************************
  * 
  * @author :fengguangjing
- * @createTime:2017-6-7下午5:38:26
+ * @createTime:2017-6-8上午10:42:33
  * @version:4.2.4
  * @modifyTime:
  * @modifyAuthor:
@@ -15,23 +15,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.open.android.activity.common.CommonCommonFragmentActivity;
 import com.open.mm.R;
-import com.open.mm.fragment.m.MArticlePullListFragmnet;
+import com.open.mm.fragment.m.MSearchEditFragment;
 import com.open.mm.utils.UrlUtils;
 
 /**
  *****************************************************************************************************************************************************************************
  * 
  * @author :fengguangjing
- * @createTime:2017-6-7下午5:38:26
+ * @createTime:2017-6-8上午10:42:33
  * @version:4.2.4
  * @modifyTime:
  * @modifyAuthor:
  * @description:
  *****************************************************************************************************************************************************************************
  */
-public class MArticlePullListActivity extends MCommonTitleBarActivity{
+public class MCommonTitleBarSearchEditFragmentActivity extends MCommonTitleBarActivity {
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -56,14 +55,16 @@ public class MArticlePullListActivity extends MCommonTitleBarActivity{
 	@Override
 	public void addfragment() {
 		// TODO Auto-generated method stub
-		Fragment fragment = MArticlePullListFragmnet.newInstance(url, true);
+		Fragment fragment = MSearchEditFragment.newInstance(url, true);
 		getSupportFragmentManager().beginTransaction().replace(R.id.layout_content, fragment).commit();
 	}
 
-	public static void startMArticlePullListActivity(Context context, String url) {
+	public static void startMCommonTitleBarSearchEditFragmentActivity(Context context, String url) {
 		Intent intent = new Intent();
 		intent.putExtra("URL", url);
-		intent.setClass(context, MArticlePullListActivity.class);
+		intent.setClass(context, MCommonTitleBarSearchEditFragmentActivity.class);
 		context.startActivity(intent);
 	}
+ 
+ 
 }

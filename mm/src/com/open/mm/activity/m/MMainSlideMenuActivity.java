@@ -84,7 +84,8 @@ public class MMainSlideMenuActivity extends SlidingFragmentActivity {
 	}
 	
 	public void toSearch(View view) {
-		MSearchEditFragmentActivity.startMSearchEditFragmentActivity(this, url);
+//		MSearchEditFragmentActivity.startMSearchEditFragmentActivity(this, url);
+		MCommonTitleBarSearchEditFragmentActivity.startMCommonTitleBarSearchEditFragmentActivity(this, url);
 	}
 
 }
