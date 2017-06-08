@@ -393,4 +393,79 @@ public class MArticleJsoupService extends CommonService {
 		}
 		return list;
 	}
+	
+	public static List<MArticleBean> parseFootList(String href, int pageNo) {
+		List<MArticleBean> list = new ArrayList<MArticleBean>();
+		try {
+			// href = makeURL(href, new HashMap<String, Object>() {
+			// {
+			// }
+			// });
+			if(pageNo>1){
+				//http://m.mm131.com/xinggan/2847.html
+				//http://m.mm131.com/xinggan/2847_2.html
+				href = href.replace(".html", "_")+pageNo+".html";
+			}
+			
+			Document doc;
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			Log.i(TAG, "url = " + href);
+
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 */
+				 Element globalnavElement =
+				 doc.select("dl.other").first();
+				Elements moduleElements = globalnavElement.select("dd");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						Element pElement = moduleElements.get(i);
+						 
+							MArticleBean sbean = new MArticleBean();
+							try {
+								try {
+									Element aElement = moduleElements.get(i).select("a").first();
+									if (aElement != null) {
+										String hrefa = aElement.attr("href");
+										Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+										sbean.setHref(hrefa);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								 
+
+								try {
+									Element imgElement = moduleElements.get(i).select("a").first();
+									if (imgElement != null) {
+										String alt = imgElement.text();
+										Log.i(TAG, "i==" + i + ";alt==" + alt);
+										sbean.setAlt(alt);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+ 
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							list.add(sbean);
+						}
+					 
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
