@@ -118,6 +118,8 @@ public class MImagePagerAdapterFragment extends BaseV4Fragment<MArticleJson, MIm
 			@Override
 			public void onPageSelected(int position) {
 				text_page_foot.setText((position+1)+" / "+list.size());
+				MImagePagerAdapterFragment.this.position = position;
+				doAsync(MImagePagerAdapterFragment.this, MImagePagerAdapterFragment.this, MImagePagerAdapterFragment.this);
 			}
 
 			@Override
@@ -143,7 +145,7 @@ public class MImagePagerAdapterFragment extends BaseV4Fragment<MArticleJson, MIm
 	public MArticleJson call() throws Exception {
 		// TODO Auto-generated method stub
 		MArticleJson mMArticleJson = new MArticleJson();
-		mMArticleJson.setList(MArticleJsoupService.parseImageList(url,pageNo));
+		mMArticleJson.setList(MArticleJsoupService.parseImagePagerList(url,position));
 		return mMArticleJson;
 	}
  
