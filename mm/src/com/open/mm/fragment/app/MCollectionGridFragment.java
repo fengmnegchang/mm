@@ -65,7 +65,7 @@ public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<Ope
 	public OpenDBJson call() throws Exception {
 		// TODO Auto-generated method stub
 		OpenDBJson mOpenDBJson = new OpenDBJson();
-		mOpenDBJson.setList(OpenDBService.queryList(getActivity()));
+		mOpenDBJson.setList(OpenDBService.queryListType(getActivity(), 0));
 		return mOpenDBJson;
 	}
 
