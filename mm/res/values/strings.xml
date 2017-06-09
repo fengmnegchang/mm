@@ -16,4 +16,5 @@
 	<string name="mm_tab_list_desp">mm tab</string>
 	<string name="mm_app_slide_menu_desp">mm app slide menu</string>
 	<string name="mm_collection_grid_list_desp">mm collection grid</string>
+	<string name="mm_history_grid_list_desp">mm 浏览历史</string>
 </resources>

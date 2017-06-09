@@ -31,6 +31,8 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.open.android.bean.db.OpenDBBean;
+import com.open.android.db.service.OpenDBService;
 import com.open.android.fragment.common.CommonPullToRefreshListFragment;
 import com.open.mm.activity.m.MImagePullListActivity;
 import com.open.mm.adapter.m.MArticleListAdapter;
@@ -208,7 +210,23 @@ public class MArticlePullListFragmnet extends CommonPullToRefreshListFragment<MA
 		// TODO Auto-generated method stub
 //		super.onItemClick(parent, view, position, id);
 		if(id!=-1 && list.get((int)id)!=null){
-			MImagePullListActivity.startMImagePullListActivity(getActivity(), list.get((int)id).getHref());
+			//保存收藏
+			MArticleBean bean = list.get((int) id);
+			String href = "";
+			if (bean.getHref().contains("_")) {
+				href = bean.getHref().split("_")[0] + ".html";
+			} else {
+				href = bean.getHref();
+			}
+			OpenDBBean openbean = new OpenDBBean();
+			openbean.setImgsrc(bean.getDataimg());
+			openbean.setUrl(href);
+			openbean.setType(1);
+			openbean.setTitle(bean.getAlt());
+			OpenDBService.insert(getActivity(), openbean);
+
+			MImagePullListActivity.startMImagePullListActivity(getActivity(),
+					bean.getHref());
 		}
 	}
 
