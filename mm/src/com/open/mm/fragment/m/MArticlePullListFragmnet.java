@@ -17,6 +17,8 @@ import java.util.Map;
 
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -30,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.open.android.fragment.common.CommonPullToRefreshListFragment;
+import com.open.mm.activity.m.MImagePullListActivity;
 import com.open.mm.adapter.m.MArticleListAdapter;
 import com.open.mm.bean.m.MArticleBean;
 import com.open.mm.json.m.MArticleJson;
@@ -195,6 +198,18 @@ public class MArticlePullListFragmnet extends CommonPullToRefreshListFragment<MA
 		// TODO Auto-generated method stub
 		super.onErrorResponse(error);
 		System.out.println(error);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.open.android.fragment.common.CommonPullToRefreshListFragment#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		super.onItemClick(parent, view, position, id);
+		if(id!=-1 && list.get((int)id)!=null){
+			MImagePullListActivity.startMImagePullListActivity(getActivity(), list.get((int)id).getHref());
+		}
 	}
 
 }

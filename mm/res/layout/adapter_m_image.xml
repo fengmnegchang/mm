@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_marginTop="3dp"
-        android:layout_below="@+id/text_title"
+        android:minHeight="500dp"
         android:scaleType="fitXY"
         android:src="@drawable/default_img" />
  
