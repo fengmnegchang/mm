@@ -15,14 +15,12 @@ import java.util.List;
 
 import android.content.Context;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.open.android.activity.common.CommonWebViewActivity;
 import com.open.android.adapter.CommonAdapter;
 import com.open.mm.R;
-import com.open.mm.activity.m.MArticlePullListActivity;
 import com.open.mm.bean.m.MSlideMenuBean;
 
 /**
@@ -49,6 +47,7 @@ public class MSlideMenuAdapter extends CommonAdapter<MSlideMenuBean> {
 			viewHolder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.adapter_m_slide_menu, parent, false);
 			viewHolder.text_title = (TextView) convertView.findViewById(R.id.text_title);
+			viewHolder.img_icon = (ImageView) convertView.findViewById(R.id.img_icon);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -56,7 +55,13 @@ public class MSlideMenuAdapter extends CommonAdapter<MSlideMenuBean> {
 		final MSlideMenuBean bean = (MSlideMenuBean) getItem(position);
 		if (bean != null) {
 			viewHolder.text_title.setText(bean.getTitle());
-			 
+			if(bean.getResid()!=0){
+				viewHolder.img_icon.setImageResource(bean.getResid());
+				viewHolder.img_icon.setVisibility(View.VISIBLE);
+			}else{
+				viewHolder.img_icon.setVisibility(View.GONE);
+			}
+			
 //			convertView.setOnClickListener(new OnClickListener() {
 //				@Override
 //				public void onClick(View v) {
@@ -71,6 +76,7 @@ public class MSlideMenuAdapter extends CommonAdapter<MSlideMenuBean> {
 
 	class ViewHolder {
 		TextView text_title;
+		ImageView img_icon;
 	}
 
 }

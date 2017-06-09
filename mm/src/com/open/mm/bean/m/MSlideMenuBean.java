@@ -27,6 +27,7 @@ import com.open.android.bean.CommonBean;
 public class MSlideMenuBean extends CommonBean {
 	private String href;
 	private String title;
+	private int resid;
 	public String getHref() {
 		return href;
 	}
@@ -38,6 +39,12 @@ public class MSlideMenuBean extends CommonBean {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public int getResid() {
+		return resid;
+	}
+	public void setResid(int resid) {
+		this.resid = resid;
 	}
 	
 
