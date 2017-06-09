@@ -12,9 +12,12 @@
 package com.open.mm.fragment.m;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.open.android.fragment.common.CommonPullToRefreshListFragment;
+import com.open.mm.activity.m.MArticlePullListActivity;
 import com.open.mm.adapter.m.MSlideMenuAdapter;
 import com.open.mm.bean.m.MSlideMenuBean;
 import com.open.mm.json.m.MSlideMenuJson;
@@ -95,6 +98,17 @@ public class MLeftMenuPullListFragmnet extends CommonPullToRefreshListFragment<M
 		mPullToRefreshListView.onRefreshComplete();
 	}
 	
-	 
+	 /* (non-Javadoc)
+	 * @see com.open.android.fragment.common.CommonPullToRefreshListFragment#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		super.onItemClick(parent, view, position, id);
+		if(id!=1 && list.get((int)id)!=null){
+			MArticlePullListActivity.startMArticlePullListActivity(getActivity(), list.get((int)id).getHref());
+		}
+		
+	}
 
 }

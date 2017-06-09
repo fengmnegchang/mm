@@ -57,13 +57,13 @@ public class MSlideMenuAdapter extends CommonAdapter<MSlideMenuBean> {
 		if (bean != null) {
 			viewHolder.text_title.setText(bean.getTitle());
 			 
-			convertView.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-//					CommonWebViewActivity.startCommonWebViewActivity(mContext, bean.getHref());
-					MArticlePullListActivity.startMArticlePullListActivity(mContext, bean.getHref());
-				}
-			});
+//			convertView.setOnClickListener(new OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+////					CommonWebViewActivity.startCommonWebViewActivity(mContext, bean.getHref());
+//					MArticlePullListActivity.startMArticlePullListActivity(mContext, bean.getHref());
+//				}
+//			});
 
 		}
 		return convertView;
