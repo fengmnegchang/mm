@@ -17,11 +17,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.open.android.fragment.common.CommonPullToRefreshListFragment;
 import com.open.mm.R;
+import com.open.mm.activity.m.MImagePagerAdapterFragmentActivity;
 import com.open.mm.adapter.m.MImageListAdapter;
 import com.open.mm.bean.m.MArticleBean;
 import com.open.mm.json.m.MArticleJson;
@@ -119,6 +121,19 @@ public class MImagePullListFragmnet extends CommonPullToRefreshListFragment<MArt
 		mPullToRefreshListView.onRefreshComplete();
 	}
 	
-	 
+	/* (non-Javadoc)
+	 * @see com.open.android.fragment.common.CommonPullToRefreshListFragment#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		super.onItemClick(parent, view, position, id);
+		if(id!=-1 && list.get((int)id)!=null){
+			MArticleJson mMArticleJson = new MArticleJson();
+			mMArticleJson.setList(list);
+			mMArticleJson.setCurrentPosition((int)id);
+			MImagePagerAdapterFragmentActivity.startMImagePagerAdapterFragmentActivity(getActivity(),list.get(0).getHref(), mMArticleJson);
+		}
+	}
   
 }

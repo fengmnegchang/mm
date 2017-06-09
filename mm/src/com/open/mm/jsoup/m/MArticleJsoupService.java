@@ -23,6 +23,7 @@ import android.util.Log;
 
 import com.open.android.jsoup.CommonService;
 import com.open.mm.bean.m.MArticleBean;
+import com.open.mm.json.m.MArticleJson;
 import com.open.mm.utils.EscapeUnescapeUtils;
 import com.open.mm.utils.UrlUtils;
 
@@ -280,10 +281,12 @@ public class MArticleJsoupService extends CommonService {
 			// {
 			// }
 			// });
-			if(pageNo>1){
-				//http://m.mm131.com/xinggan/2847.html
-				//http://m.mm131.com/xinggan/2847_2.html
-				href = href.replace(".html", "_")+pageNo+".html";
+			if(!href.contains("_")){
+				if(pageNo>1){
+					//http://m.mm131.com/xinggan/2847.html
+					//http://m.mm131.com/xinggan/2847_2.html
+					href = href.replace(".html", "_")+pageNo+".html";
+				}
 			}
 			
 			Document doc;
@@ -469,7 +472,8 @@ public class MArticleJsoupService extends CommonService {
 		return list;
 	}
 	
-	public static List<MArticleBean> parseImagePagerList(String href,int pageNo) {
+	public static MArticleJson parseImagePagerList(String href,int pageNo) {
+		MArticleJson mMArticleJson = new MArticleJson();
 		List<MArticleBean> list = new ArrayList<MArticleBean>();
 		int currentposition = 0;
 		try {
@@ -477,12 +481,12 @@ public class MArticleJsoupService extends CommonService {
 			// {
 			// }
 			// });
-			if(pageNo>1){
-				//http://m.mm131.com/xinggan/2847.html
-				//http://m.mm131.com/xinggan/2847_2.html
-				href = href.replace(".html", "_")+pageNo+".html";
-			}
-			
+//			if(pageNo>1){
+//				//http://m.mm131.com/xinggan/2847.html
+//				//http://m.mm131.com/xinggan/2847_2.html
+//				href = href.replace(".html", "_")+pageNo+".html";
+//			}
+//			
 			Document doc;
 			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
 			Log.i(TAG, "url = " + href);
@@ -526,8 +530,11 @@ public class MArticleJsoupService extends CommonService {
 						String pager = pElement.text().replace("页", "");
 						currentposition = Integer.parseInt(pager.split("/")[0]);
 						int tposition = Integer.parseInt(pager.split("/")[1]);
+						mMArticleJson.setCurrentPosition(currentposition);
+						mMArticleJson.setMaxPage(tposition);
 						for(int i=0;i<tposition;i++){
 							MArticleBean sbean = new MArticleBean();
+							sbean.setHref(href.replace(".html", "_")+(i+1)+".html");
 							list.add(sbean);
 						}
 					}
@@ -616,6 +623,7 @@ public class MArticleJsoupService extends CommonService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+		mMArticleJson.setList(list);
+		return mMArticleJson;
 	}
 }

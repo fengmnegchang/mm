@@ -51,14 +51,18 @@ public class MImagePagerAdapterFragmentActivity extends CommonFragmentActivity<M
 		super.findView();
 		weakReferenceHandler = new WeakActivityReferenceHandler(this);
 	}
-	
+	 
 	/* (non-Javadoc)
 	 * @see com.open.qianbailu.activity.CommonFragmentActivity#initValue()
 	 */
 	@Override
 	protected void initValue() {
+		if (getIntent().getStringExtra("URL") != null) {
+			url = getIntent().getStringExtra("URL");
+		} else {
+			url = UrlUtils.MM_M_IMAGE;
+		}
 		// TODO Auto-generated method stub
-		super.initValue();
 		MArticleJson mShowJson = (MArticleJson) getIntent().getSerializableExtra("SHOW_JSON");
 		Fragment fragment;
 		if(mShowJson!=null && mShowJson.getList()!=null&& mShowJson.getList().size()>0){
@@ -108,9 +112,10 @@ public class MImagePagerAdapterFragmentActivity extends CommonFragmentActivity<M
 		}
 	}
 	 
-	public static void startMImagePagerAdapterFragmentActivity(Context context, MArticleJson mMArticleJson) {
+	public static void startMImagePagerAdapterFragmentActivity(Context context, String url,MArticleJson mMArticleJson) {
 		Intent intent = new Intent();
 		intent.putExtra("SHOW_JSON", mMArticleJson);
+		intent.putExtra("URL", url);
 		intent.setClass(context, MImagePagerAdapterFragmentActivity.class);
 		context.startActivity(intent);
 	}

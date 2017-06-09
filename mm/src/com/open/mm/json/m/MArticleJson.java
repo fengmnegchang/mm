@@ -30,6 +30,7 @@ import com.open.mm.bean.m.MArticleBean;
 public class MArticleJson extends CommonJson {
 	private List<MArticleBean> list;
 	private int currentPosition;
+	private int maxPage;
 
 	public List<MArticleBean> getList() {
 		return list;
@@ -45,6 +46,14 @@ public class MArticleJson extends CommonJson {
 
 	public void setCurrentPosition(int currentPosition) {
 		this.currentPosition = currentPosition;
+	}
+
+	public int getMaxPage() {
+		return maxPage;
+	}
+
+	public void setMaxPage(int maxPage) {
+		this.maxPage = maxPage;
 	}
 	
 	

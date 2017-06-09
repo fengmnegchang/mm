@@ -102,8 +102,9 @@ public class MImagePagerAdapterFragment extends BaseV4Fragment<MArticleJson, MIm
 			viewpager.setCurrentItem(position);
 			text_page_foot.setText((position+1)+" / "+list.size());
 		}else{
-			doAsync(this, this, this);
+//			doAsync(this, this, this);
 		}
+		doAsync(this, this, this);
 	}
 	
 	/* (non-Javadoc)
@@ -119,6 +120,7 @@ public class MImagePagerAdapterFragment extends BaseV4Fragment<MArticleJson, MIm
 			public void onPageSelected(int position) {
 				text_page_foot.setText((position+1)+" / "+list.size());
 				MImagePagerAdapterFragment.this.position = position;
+				pageNo=0;
 				doAsync(MImagePagerAdapterFragment.this, MImagePagerAdapterFragment.this, MImagePagerAdapterFragment.this);
 			}
 
@@ -144,8 +146,14 @@ public class MImagePagerAdapterFragment extends BaseV4Fragment<MArticleJson, MIm
 	@Override
 	public MArticleJson call() throws Exception {
 		// TODO Auto-generated method stub
-		MArticleJson mMArticleJson = new MArticleJson();
-		mMArticleJson.setList(MArticleJsoupService.parseImagePagerList(url,position));
+		MArticleJson mMArticleJson =null;
+		if(pageNo==1){
+			mMArticleJson = MArticleJsoupService.parseImagePagerList(url,position);
+		}else{
+			mMArticleJson = new MArticleJson();
+			mMArticleJson.setList(MArticleJsoupService.parseImageList(list.get(position).getHref(),position));
+			mMArticleJson.setCurrentPosition(position);
+		}
 		return mMArticleJson;
 	}
  
@@ -158,9 +166,14 @@ public class MImagePagerAdapterFragment extends BaseV4Fragment<MArticleJson, MIm
 	@Override
 	public void onCallback(MArticleJson result) {
 		// TODO Auto-generated method stub
-		super.onCallback(result);
-		list.clear();
-		list.addAll(result.getList());
+//		super.onCallback(result);
+		if(result.getList().size()>1){
+			list.clear();
+			list.addAll(result.getList());
+		}else{
+			list.set(result.getCurrentPosition(), result.getList().get(0));
+		}
+		
 		mMImagePagerAdapter.notifyDataSetChanged();
 		text_page_foot.setText((position+1)+" / "+list.size());
 	}

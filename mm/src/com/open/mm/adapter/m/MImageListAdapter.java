@@ -62,11 +62,11 @@ public class MImageListAdapter extends CommonAdapter<MArticleBean>{
 				ImageLoader.getInstance().displayImage(bean.getDataimg(), viewHolder.imageview, options, getImageLoadingListener());
 			}
 
-			convertView.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-				}
-			});
+//			convertView.setOnClickListener(new OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//				}
+//			});
 
 		}
 		return convertView;
