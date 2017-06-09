@@ -68,7 +68,7 @@ public class MArticleListAdapter extends CommonAdapter<MArticleBean>{
 				ImageLoader.getInstance().displayImage(bean.getDataimg(), viewHolder.imageview, options, getImageLoadingListener());
 			}
 
-			convertView.setOnClickListener(new OnClickListener() {
+			viewHolder.imageview.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					CommonWebViewActivity.startCommonWebViewActivity(mContext, bean.getHref());

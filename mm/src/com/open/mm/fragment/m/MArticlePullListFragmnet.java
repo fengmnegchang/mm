@@ -206,7 +206,7 @@ public class MArticlePullListFragmnet extends CommonPullToRefreshListFragment<MA
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		// TODO Auto-generated method stub
-		super.onItemClick(parent, view, position, id);
+//		super.onItemClick(parent, view, position, id);
 		if(id!=-1 && list.get((int)id)!=null){
 			MImagePullListActivity.startMImagePullListActivity(getActivity(), list.get((int)id).getHref());
 		}
