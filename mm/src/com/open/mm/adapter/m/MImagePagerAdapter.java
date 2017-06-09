@@ -86,9 +86,15 @@ public class MImagePagerAdapter extends CommonPagerAdapter<MArticleBean>{
 	                   @Override  
 	                   public void onClick(DialogInterface dialog, int which) {  
 	                	   //保存收藏
+	                	   String href="";
+	                	   if(bean.getHref().contains("_")){
+	                		   href = bean.getHref().split("_")[0]+".html";
+	                	   }else{
+	                		   href = bean.getHref();
+	                	   }
 	                	   OpenDBBean  openbean = new OpenDBBean();
 	                	   openbean.setImgsrc(bean.getDataimg());
-	                	   openbean.setUrl(bean.getHref());
+	                	   openbean.setUrl(href);
 		       		       openbean.setType(0);
 		       		       openbean.setTitle(bean.getAlt());
 	                	   OpenDBService.insert(mContext, openbean);

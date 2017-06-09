@@ -12,11 +12,14 @@
 package com.open.mm.fragment.app;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.open.android.bean.db.OpenDBBean;
 import com.open.android.db.service.OpenDBService;
 import com.open.android.fragment.common.CommonPullToRefreshGridFragment;
+import com.open.mm.activity.m.MImagePullListActivity;
 import com.open.mm.adapter.app.MCollectionGridAdapter;
 import com.open.mm.json.m.OpenDBJson;
 
@@ -83,10 +86,22 @@ public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<Ope
 				list.addAll(result.getList());
 			}
 		}
+//		mPullToRefreshHeadGridView.getRefreshableView().setNumColumns(result.getList().size());
 		mMCollectionGridAdapter.notifyDataSetChanged();
 		// Call onRefreshComplete when the list has been refreshed.
 		mPullToRefreshHeadGridView.onRefreshComplete();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.open.android.fragment.common.CommonPullToRefreshGridFragment#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		super.onItemClick(parent, view, position, id);
+		if(id!=-1 && list.get((int)id)!=null){
+			MImagePullListActivity.startMImagePullListActivity(getActivity(), list.get((int)id).getUrl());
+		}
+	}
 	
 }
