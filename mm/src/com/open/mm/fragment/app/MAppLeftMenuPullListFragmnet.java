@@ -25,6 +25,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.open.mm.R;
 import com.open.mm.activity.app.MCollectionGridFragmentActivity;
+import com.open.mm.activity.app.MHistoryListGridFragmentActivity;
 import com.open.mm.adapter.m.MSlideMenuAdapter;
 import com.open.mm.bean.m.MSlideMenuBean;
 import com.open.mm.fragment.m.MLeftMenuPullListFragmnet;
@@ -122,6 +123,8 @@ public class MAppLeftMenuPullListFragmnet extends MLeftMenuPullListFragmnet{
 			String title = list.get((int)id).getTitle();
 			if(title.equals("我的收藏")){
 				MCollectionGridFragmentActivity.startMCollectionGridFragmentActivity(getActivity(), title);
+			}else if(title.equals("浏览历史")){
+				MHistoryListGridFragmentActivity.startMHistoryListGridFragmentActivity(getActivity(), title);
 			}
 		}
 	}
