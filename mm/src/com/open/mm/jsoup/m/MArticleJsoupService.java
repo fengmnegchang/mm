@@ -378,6 +378,26 @@ public class MArticleJsoupService extends CommonService {
 									e.printStackTrace();
 								}
 
+								
+								/**
+								 * <div class="post-footer single-post-footer">
+            <span class="post-meta">分类：<a href="http://m.mm131.com/xinggan/">性感美女</a></span>
+            <span class="post-tag">标签：<a href="http://m.mm131.com/tag/%B4%F3%B2%A8">大波</a><a href="http://m.mm131.com/tag/%D4%C3%D4%C3">悦悦</a><a href="http://m.mm131.com/tag/%D2%D5%CA%F5%D0%B4%D5%E6">艺术写真</a></span>
+         </div>
+								 */
+								
+								try {
+									Element footerElement =  doc.select("div.single-post-footer").first();
+									Element metaElement = footerElement.select("span.post-meta").first();
+									sbean.setMeta(metaElement.toString());
+									
+									Element tagElement = footerElement.select("span.post-tag").first();
+									sbean.setTag(tagElement.toString());
+									
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								
 							} catch (Exception e) {
 								e.printStackTrace();
 							}

@@ -24,5 +24,22 @@
         android:layout_below="@+id/text_title"
         android:layout_marginTop="5dp"
         android:textSize="14sp" />
+    
+     <TextView
+        android:id="@+id/text_meta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_camLiDes"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp" />
+     
+     
+      <TextView
+        android:id="@+id/text_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_meta"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp" />
 
 </RelativeLayout>
