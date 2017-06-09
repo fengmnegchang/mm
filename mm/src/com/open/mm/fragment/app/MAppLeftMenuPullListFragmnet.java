@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.open.mm.R;
+import com.open.mm.activity.app.MCollectionGridFragmentActivity;
 import com.open.mm.adapter.m.MSlideMenuAdapter;
 import com.open.mm.bean.m.MSlideMenuBean;
 import com.open.mm.fragment.m.MLeftMenuPullListFragmnet;
@@ -117,5 +118,11 @@ public class MAppLeftMenuPullListFragmnet extends MLeftMenuPullListFragmnet{
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		// TODO Auto-generated method stub
 //		super.onItemClick(parent, view, position, id);
+		if(id!=-1&&list.get((int)id)!=null){
+			String title = list.get((int)id).getTitle();
+			if(title.equals("我的收藏")){
+				MCollectionGridFragmentActivity.startMCollectionGridFragmentActivity(getActivity(), title);
+			}
+		}
 	}
 }

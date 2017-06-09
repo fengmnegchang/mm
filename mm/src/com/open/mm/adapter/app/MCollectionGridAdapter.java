@@ -17,6 +17,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -49,12 +50,14 @@ public class MCollectionGridAdapter extends CommonAdapter<OpenDBBean> {
 			viewHolder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.adapter_app_collection, parent, false);
 			viewHolder.imageview = (ImageView) convertView.findViewById(R.id.imageview);
+			viewHolder.texttitle = (TextView) convertView.findViewById(R.id.texttitle);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		final OpenDBBean bean = (OpenDBBean) getItem(position);
 		if (bean != null) {
+			viewHolder.texttitle.setText(bean.getTitle());
 			if (bean.getImgsrc()!= null && bean.getImgsrc().length() > 0) {
 				DisplayImageOptions options = new DisplayImageOptions.Builder().showStubImage(R.drawable.default_img).showImageForEmptyUri(R.drawable.default_img).showImageOnFail(R.drawable.default_img)
 //						.cacheInMemory().cacheOnDisc().build();
@@ -74,5 +77,6 @@ public class MCollectionGridAdapter extends CommonAdapter<OpenDBBean> {
 
 	class ViewHolder {
 		ImageView imageview;
+		TextView texttitle;
 	}
 }
