@@ -15,4 +15,5 @@
 	<string name="mm_image_pager_list_desp">mm 看图pager</string>
 	<string name="mm_tab_list_desp">mm tab</string>
 	<string name="mm_app_slide_menu_desp">mm app slide menu</string>
+	<string name="mm_collection_grid_list_desp">mm collection grid</string>
 </resources>

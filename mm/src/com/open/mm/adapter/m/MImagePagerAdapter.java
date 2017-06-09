@@ -26,6 +26,8 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.open.android.adapter.CommonPagerAdapter;
+import com.open.android.bean.db.OpenDBBean;
+import com.open.android.db.service.OpenDBService;
 import com.open.android.utils.ImageAsyncTask;
 import com.open.android.view.ZoomImageView;
 import com.open.android.weak.WeakActivityReferenceHandler;
@@ -83,6 +85,14 @@ public class MImagePagerAdapter extends CommonPagerAdapter<MArticleBean>{
 	               builder.setItems(new String[]{mContext.getResources().getString(R.string.save_picture)}, new DialogInterface.OnClickListener() {  
 	                   @Override  
 	                   public void onClick(DialogInterface dialog, int which) {  
+	                	   //保存收藏
+	                	   OpenDBBean  openbean = new OpenDBBean();
+	                	   openbean.setImgsrc(bean.getDataimg());
+	                	   openbean.setUrl(bean.getHref());
+		       		       openbean.setType(0);
+		       		       openbean.setTitle(bean.getAlt());
+	                	   OpenDBService.insert(mContext, openbean);
+	                	   
 	                	   mViewHolder.imageview.setDrawingCacheEnabled(true);  
 	                       Bitmap imageBitmap = mViewHolder.imageview.getDrawingCache();  
 	                       if (imageBitmap != null) {  

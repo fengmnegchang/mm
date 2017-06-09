@@ -116,6 +116,13 @@
             android:theme="@style/Theme.PageIndicatorDefaults"
             >
         </activity>
+         <!--mm 收藏grid 列表 -->
+        <activity
+            android:name="com.open.mm.activity.app.MCollectionGridFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_collection_grid_list_desp"
+             >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"
