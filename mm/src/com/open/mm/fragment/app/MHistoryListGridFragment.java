@@ -1,5 +1,11 @@
 package com.open.mm.fragment.app;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,11 +14,12 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.open.android.bean.db.OpenDBBean;
 import com.open.android.db.service.OpenDBService;
 import com.open.android.fragment.common.CommonPullToRefreshListFragment;
-import com.open.mm.adapter.app.MCollectionGridAdapter;
+import com.open.mm.adapter.app.MHistoryGridAdapter;
+import com.open.mm.bean.app.OpenDBListBean;
 import com.open.mm.json.m.OpenDBJson;
 
-public class MHistoryListGridFragment extends CommonPullToRefreshListFragment<OpenDBBean, OpenDBJson> {
-	public MCollectionGridAdapter mMCollectionGridAdapter;
+public class MHistoryListGridFragment extends CommonPullToRefreshListFragment<OpenDBListBean, OpenDBJson> {
+	public MHistoryGridAdapter mMHistoryGridAdapter;
 	
 	public static MHistoryListGridFragment newInstance(String url, boolean isVisibleToUser) {
 		MHistoryListGridFragment fragment = new MHistoryListGridFragment();
@@ -31,8 +38,8 @@ public class MHistoryListGridFragment extends CommonPullToRefreshListFragment<Op
 	public void initValues() {
 		// TODO Auto-generated method stub
 		super.initValues();
-		mMCollectionGridAdapter = new MCollectionGridAdapter(getActivity(), list);
-		mPullToRefreshListView.setAdapter(mMCollectionGridAdapter);
+		mMHistoryGridAdapter = new MHistoryGridAdapter(getActivity(), list);
+		mPullToRefreshListView.setAdapter(mMHistoryGridAdapter);
 	}
 
 	/* (non-Javadoc)
@@ -56,15 +63,35 @@ public class MHistoryListGridFragment extends CommonPullToRefreshListFragment<Op
 		Log.i(TAG, "getMode ===" + mPullToRefreshListView.getCurrentMode());
 		if (mPullToRefreshListView.getCurrentMode() == Mode.PULL_FROM_START) {
 			list.clear();
-			list.addAll(result.getList());
+//			list.addAll(result.getList());
+			Map<String,ArrayList<OpenDBBean>> map= new HashMap<String,ArrayList<OpenDBBean>>();
+			String date;
+			for(OpenDBBean bean:result.getList()){
+				//2017年06月09日 21:00
+				date =  bean.getTime().substring(0, 11);
+				Log.d(TAG, "date=="+date);
+				if(map.containsKey(date)){
+					map.get(date).add(bean);
+				}else{
+					ArrayList<OpenDBBean> list = new ArrayList<OpenDBBean>();
+					list.add(bean);
+					map.put(date, list);
+				}
+			}
+			
+			for(String time:map.keySet()){
+				OpenDBListBean bean = new OpenDBListBean();
+				bean.setList(map.get(time));
+				list.add(bean);
+			}
 			pageNo = 1;
 		} else {
 			if (result.getList() != null && result.getList().size() > 0) {
-				list.addAll(result.getList());
+//				list.addAll(result.getList());
 			}
 		}
 //		mPullToRefreshHeadGridView.getRefreshableView().setNumColumns(result.getList().size());
-		mMCollectionGridAdapter.notifyDataSetChanged();
+		mMHistoryGridAdapter.notifyDataSetChanged();
 		// Call onRefreshComplete when the list has been refreshed.
 		mPullToRefreshListView.onRefreshComplete();
 	}
