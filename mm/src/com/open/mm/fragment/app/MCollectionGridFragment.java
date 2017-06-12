@@ -11,14 +11,23 @@
  */
 package com.open.mm.fragment.app;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshHeadGridView;
 import com.open.android.bean.db.OpenDBBean;
 import com.open.android.db.service.OpenDBService;
 import com.open.android.fragment.common.CommonPullToRefreshGridFragment;
+import com.open.mm.R;
 import com.open.mm.activity.m.MImagePullListActivity;
 import com.open.mm.adapter.app.MCollectionGridAdapter;
 import com.open.mm.json.m.OpenDBJson;
@@ -34,9 +43,11 @@ import com.open.mm.json.m.OpenDBJson;
  * @description:
  ***************************************************************************************************************************************************************************** 
  */
-public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<OpenDBBean, OpenDBJson> {
+public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<OpenDBBean, OpenDBJson> implements OnClickListener {
 	public MCollectionGridAdapter mMCollectionGridAdapter;
 	public boolean editable;
+	public RelativeLayout layout_delete;
+	public TextView txt_all_select,txt_delelte;
 	
 	public static MCollectionGridFragment newInstance(String url, boolean isVisibleToUser) {
 		MCollectionGridFragment fragment = new MCollectionGridFragment();
@@ -45,7 +56,15 @@ public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<Ope
 		fragment.url = url;
 		return fragment;
 	}
-	
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_collection_pullgridview, container, false);
+		mPullToRefreshHeadGridView = (PullToRefreshHeadGridView) view.findViewById(R.id.pull_refresh_grid);
+		layout_delete = (RelativeLayout) view.findViewById(R.id.layout_delete);
+		txt_all_select = (TextView) view.findViewById(R.id.txt_all_select);
+		txt_delelte = (TextView) view.findViewById(R.id.txt_delelte);
+		return view;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -57,6 +76,17 @@ public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<Ope
 		super.initValues();
 		mMCollectionGridAdapter = new MCollectionGridAdapter(getActivity(), list);
 		mPullToRefreshHeadGridView.setAdapter(mMCollectionGridAdapter);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.open.android.fragment.common.CommonPullToRefreshGridFragment#bindEvent()
+	 */
+	@Override
+	public void bindEvent() {
+		// TODO Auto-generated method stub
+		super.bindEvent();
+		txt_all_select.setOnClickListener(this);
+		txt_delelte.setOnClickListener(this);
 	}
 
 	/* (non-Javadoc)
@@ -116,13 +146,13 @@ public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<Ope
 			editable = false;
 			for(OpenDBBean bean:list){
 				bean.setEditable(false);
-				if(bean.isSelectstate()){
-					OpenDBService.delete(getActivity(), bean);
-				}
+				bean.setSelectstate(false);
 			}
-			weakReferenceHandler.sendEmptyMessage(MESSAGE_HANDLER);
-//			mMCollectionGridAdapter.notifyDataSetChanged();
+			layout_delete.setVisibility(View.GONE);
+			txt_all_select.setText("全选");
+			mMCollectionGridAdapter.notifyDataSetChanged();
 		}else{
+			layout_delete.setVisibility(View.VISIBLE);
 			//编辑
 			editable = true;
 			for(OpenDBBean bean:list){
@@ -130,6 +160,63 @@ public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<Ope
 			}
 			mMCollectionGridAdapter.notifyDataSetChanged();
 		}
+	}
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.txt_all_select:
+			//全选
+			if(isAllSelected()){
+				setSelectedState(false);
+				txt_all_select.setText("全选");
+			}else{
+				txt_all_select.setText("取消");
+				setSelectedState(true);
+			}
+			break;
+		case R.id.txt_delelte:
+			//删除
+			for(OpenDBBean bean:list){
+				bean.setEditable(true);
+				if(bean.isSelectstate()){
+					OpenDBService.delete(getActivity(), bean);
+				}
+			}
+			weakReferenceHandler.sendEmptyMessage(MESSAGE_HANDLER);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	/**
+	 * 是否全选
+	 */
+	public boolean isAllSelected(){
+		boolean allSelected = true;
+		for(OpenDBBean bean:list){
+			 if(!bean.isSelectstate()){
+				 allSelected = false; 
+				 break;
+			 }
+		}
+		return allSelected;
+	}
+	
+	
+	/**
+	 * 全选或者取消全选
+	 */
+	public void setSelectedState(boolean state){
+		for(OpenDBBean bean:list){
+			bean.setSelectstate(state);
+		}
+		mMCollectionGridAdapter.notifyDataSetChanged();
 	}
 	
 }
