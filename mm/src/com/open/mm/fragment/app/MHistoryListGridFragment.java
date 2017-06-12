@@ -108,4 +108,9 @@ public class MHistoryListGridFragment extends CommonPullToRefreshListFragment<Op
 //		}
 	}
 	
+	
+	public void cleanHistory(){
+		//OpenDBService.deleteAll(mContext);
+	}
+	
 }
