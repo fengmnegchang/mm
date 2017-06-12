@@ -15,6 +15,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class MCollectionGridAdapter extends CommonAdapter<OpenDBBean> {
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.adapter_app_collection, parent, false);
+			viewHolder.image_select = (ImageView) convertView.findViewById(R.id.image_select);
 			viewHolder.imageview = (ImageView) convertView.findViewById(R.id.imageview);
 			viewHolder.texttitle = (TextView) convertView.findViewById(R.id.texttitle);
 			convertView.setTag(viewHolder);
@@ -64,6 +66,28 @@ public class MCollectionGridAdapter extends CommonAdapter<OpenDBBean> {
 				.cacheInMemory().cacheOnDisc().imageScaleType(ImageScaleType.EXACTLY_STRETCHED).build();
 				ImageLoader.getInstance().displayImage(bean.getImgsrc(), viewHolder.imageview, options, getImageLoadingListener());
 			}
+			if(bean.isEditable()){
+				viewHolder.image_select.setVisibility(View.VISIBLE);
+				if(bean.isSelectstate()){
+					viewHolder.image_select.setImageResource(R.drawable.icon_selected);
+				}else{
+					viewHolder.image_select.setImageResource(R.drawable.icon_select_normal);
+				}
+			}else{
+				viewHolder.image_select.setVisibility(View.GONE);
+			}
+			final ImageView image_select = viewHolder.image_select;
+			viewHolder.image_select.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if(bean.isSelectstate()){
+						image_select.setImageResource(R.drawable.icon_select_normal);
+					}else{
+						image_select.setImageResource(R.drawable.icon_selected);
+					}
+					bean.setSelectstate(!bean.isSelectstate());
+				}
+			});
 
 //			convertView.setOnClickListener(new OnClickListener() {
 //				@Override
@@ -76,7 +100,7 @@ public class MCollectionGridAdapter extends CommonAdapter<OpenDBBean> {
 	}
 
 	class ViewHolder {
-		ImageView imageview;
+		ImageView imageview,image_select;
 		TextView texttitle;
 	}
 }

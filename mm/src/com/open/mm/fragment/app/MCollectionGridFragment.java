@@ -36,6 +36,7 @@ import com.open.mm.json.m.OpenDBJson;
  */
 public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<OpenDBBean, OpenDBJson> {
 	public MCollectionGridAdapter mMCollectionGridAdapter;
+	public boolean editable;
 	
 	public static MCollectionGridFragment newInstance(String url, boolean isVisibleToUser) {
 		MCollectionGridFragment fragment = new MCollectionGridFragment();
@@ -100,7 +101,34 @@ public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<Ope
 		// TODO Auto-generated method stub
 		super.onItemClick(parent, view, position, id);
 		if(id!=-1 && list.get((int)id)!=null){
-			MImagePullListActivity.startMImagePullListActivity(getActivity(), list.get((int)id).getUrl());
+			if(editable){
+				list.get((int)id).setSelectstate(!list.get((int)id).isSelectstate());
+				mMCollectionGridAdapter.notifyDataSetChanged();
+			}else{
+				MImagePullListActivity.startMImagePullListActivity(getActivity(), list.get((int)id).getUrl());
+			}
+		}
+	}
+	
+	public void setEditable(boolean editable){
+		if(editable){
+			//完成
+			editable = false;
+			for(OpenDBBean bean:list){
+				bean.setEditable(false);
+				if(bean.isSelectstate()){
+					OpenDBService.delete(getActivity(), bean);
+				}
+			}
+			weakReferenceHandler.sendEmptyMessage(MESSAGE_HANDLER);
+//			mMCollectionGridAdapter.notifyDataSetChanged();
+		}else{
+			//编辑
+			editable = true;
+			for(OpenDBBean bean:list){
+				bean.setEditable(true);
+			}
+			mMCollectionGridAdapter.notifyDataSetChanged();
 		}
 	}
 	

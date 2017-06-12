@@ -33,6 +33,7 @@ import com.open.mm.utils.UrlUtils;
  *****************************************************************************************************************************************************************************
  */
 public class MCollectionGridFragmentActivity extends MCommonTitleBarActivity{
+	public boolean editable;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -65,7 +66,15 @@ public class MCollectionGridFragmentActivity extends MCommonTitleBarActivity{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.txt_right:
-			
+			if(editable){
+				setRightTextValue("编辑");
+			}else{
+				setRightTextValue("完成");
+			}
+			MCollectionGridFragment fragment = (MCollectionGridFragment) getSupportFragmentManager()
+					.findFragmentById(R.id.layout_content);
+			fragment.setEditable(editable);
+			editable = !editable;
 			break;
 		case R.id.id_iv_left:
 			finish();
