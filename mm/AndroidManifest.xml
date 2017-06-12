@@ -130,6 +130,13 @@
             android:description="@string/mm_history_grid_list_desp"
              >
         </activity>
+        <!--mm 浏览历史横向list 列表 -->
+        <activity
+            android:name="com.open.mm.activity.app.MHistoryHorizontalListFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_history_horizontal_list_desp"
+             >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"
