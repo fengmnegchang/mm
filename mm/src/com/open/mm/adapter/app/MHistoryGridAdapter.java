@@ -66,6 +66,7 @@ public class MHistoryGridAdapter extends CommonAdapter<OpenDBListBean> {
 		final OpenDBListBean json = (OpenDBListBean) getItem(position);
 		String date = json.getList().get(0).getTime().substring(0, 11);
 		viewHolder.textdate.setText(date+"看"+json.getList().size()+"图集");
+		viewHolder.lay_grid.removeAllViews();
 		for(final OpenDBBean bean:json.getList()){
 			View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_app_collection, null);
 			ImageView  imageview = (ImageView) view.findViewById(R.id.imageview);
