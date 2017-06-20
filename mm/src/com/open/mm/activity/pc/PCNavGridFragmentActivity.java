@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 
 import com.open.mm.R;
 import com.open.mm.activity.m.MCommonTitleBarActivity;
+import com.open.mm.fragment.pc.PCNavGridAddHeadFragment;
 import com.open.mm.fragment.pc.PCNavGridFragment;
 import com.open.mm.utils.UrlUtils;
 
@@ -57,7 +58,8 @@ public class PCNavGridFragmentActivity extends MCommonTitleBarActivity{
 	@Override
 	public void addfragment() {
 		// TODO Auto-generated method stub
-		Fragment fragment = PCNavGridFragment.newInstance(url, true);
+//		Fragment fragment = PCNavGridFragment.newInstance(url, true);
+		Fragment fragment = PCNavGridAddHeadFragment.newInstance(url, true);
 		getSupportFragmentManager().beginTransaction().replace(R.id.layout_content, fragment).commit();
 	}
 
