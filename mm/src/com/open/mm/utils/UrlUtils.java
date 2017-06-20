@@ -33,4 +33,6 @@ public class UrlUtils {
 	public static final String MM_M_SEARCH ="http://m.mm131.com/search.php?";
 	/** m 看图 **/
 	public static final String MM_M_IMAGE = "http://m.mm131.com/xinggan/2847.html";
+	/** mm pc性感 **/
+	public static final String MM_PC_XIANGGAN = "http://www.mm131.com/xinggan/";
 }
