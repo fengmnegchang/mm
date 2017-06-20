@@ -152,6 +152,14 @@
             android:description="@string/mm_pc_nav_grid_list_desp"
              >
         </activity>
+        <!-- mm pc slide menu-->
+        <activity
+            android:name="com.open.mm.activity.pc.PCMainSlideMenuActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_pc_slide_menu_desp"
+            android:theme="@style/Theme.PageIndicatorDefaults"
+            >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"

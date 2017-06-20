@@ -50,7 +50,17 @@ public class PCNavJsoupService extends CommonService {
 			//http://www.mm131.com/xinggan/list_6_2.html
 			if(pageNo>1){
 				if(href.contains("xinggan")){
-					href = UrlUtils.MM_PC_XIANGGAN+"list_6_"+pageNo+".html";
+					href = UrlUtils.MM_PC+"xinggan/list_6_"+pageNo+".html";
+				}else if(href.contains("qingchun")){
+					href = UrlUtils.MM_PC+"qingchun/list_1_"+pageNo+".html";
+				}else if(href.contains("xiaohua")){
+					href = UrlUtils.MM_PC+"xiaohua/list_2_"+pageNo+".html";
+				}else if(href.contains("chemo")){
+					href = UrlUtils.MM_PC+"chemo/list_3_"+pageNo+".html";
+				}else if(href.contains("qipao")){
+					href = UrlUtils.MM_PC+"qipao/list_4_"+pageNo+".html";
+				}else if(href.contains("mingxing")){
+					href = UrlUtils.MM_PC+"mingxing/list_5_"+pageNo+".html";
 				}
 			}
 			
