@@ -63,8 +63,8 @@ public class PCNavGridAdapter extends CommonAdapter<MArticleBean>{
 			viewHolder.text_title.setText(bean.getAlt());
 			if (bean.getSrc()!= null && bean.getSrc().length() > 0) {
 				DisplayImageOptions options = new DisplayImageOptions.Builder().showStubImage(R.drawable.default_img).showImageForEmptyUri(R.drawable.default_img).showImageOnFail(R.drawable.default_img)
-//						.cacheInMemory().cacheOnDisc().build();
-				.cacheInMemory().cacheOnDisc().imageScaleType(ImageScaleType.EXACTLY_STRETCHED).build();
+						.cacheInMemory().cacheOnDisc().build();
+//				.cacheInMemory().cacheOnDisc().imageScaleType(ImageScaleType.EXACTLY_STRETCHED).build();
 				ImageLoader.getInstance().displayImage(bean.getSrc(), viewHolder.imageview, options, getImageLoadingListener());
 			}
 

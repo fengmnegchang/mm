@@ -54,7 +54,7 @@ public class PCNavJsoupService extends CommonService {
 				}
 			}
 			
-			doc = Jsoup.parse(href);
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
 			Log.i(TAG, "url = " + href);
 
 //			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
@@ -71,7 +71,7 @@ public class PCNavJsoupService extends CommonService {
 				Elements moduleElements = globalnavElement.select("dd");
 				if (moduleElements != null && moduleElements.size() > 0) {
 					for (int i = 0; i < moduleElements.size(); i++) {
-						if(moduleElements.get(i).attr("class").equals("page")){
+						if(moduleElements.get(i).select("dd").first().attr("class").equals("page")){
 							continue;
 						}
 							MArticleBean sbean = new MArticleBean();

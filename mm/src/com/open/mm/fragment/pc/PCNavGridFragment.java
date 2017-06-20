@@ -52,9 +52,9 @@ public class PCNavGridFragment  extends CommonPullToRefreshGridFragment<MArticle
 	@Override
 	public void initValues() {
 		// TODO Auto-generated method stub
-		super.initValues();
 		mPCNavGridAdapter = new PCNavGridAdapter(getActivity(), list);
 		mPullToRefreshHeadGridView.setAdapter(mPCNavGridAdapter);
+		mPullToRefreshHeadGridView.setMode(Mode.BOTH);
 	}
 	
 	/* (non-Javadoc)

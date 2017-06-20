@@ -21,9 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:gravity="center"
+        android:scaleType="fitCenter"
         android:layout_marginTop="3dp"
         android:layout_below="@+id/text_title"
-        android:scaleType="fitXY"
         android:src="@drawable/default_img" />
 
     <TextView
