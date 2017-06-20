@@ -11,12 +11,18 @@
  */
 package com.open.mm.fragment.pc;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshHeadGridView;
 import com.open.android.fragment.common.CommonPullToRefreshGridFragment;
+import com.open.mm.R;
 import com.open.mm.adapter.pc.PCNavGridAdapter;
 import com.open.mm.bean.m.MArticleBean;
 import com.open.mm.json.m.MArticleJson;
@@ -35,6 +41,8 @@ import com.open.mm.jsoup.pc.PCNavJsoupService;
  */
 public class PCNavGridFragment  extends CommonPullToRefreshGridFragment<MArticleBean, MArticleJson> {
 	public PCNavGridAdapter mPCNavGridAdapter;
+	public View headview;
+	
 	
 	public static PCNavGridFragment newInstance(String url, boolean isVisibleToUser) {
 		PCNavGridFragment fragment = new PCNavGridFragment();
@@ -44,6 +52,13 @@ public class PCNavGridFragment  extends CommonPullToRefreshGridFragment<MArticle
 		return fragment;
 	}
 	
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_common_pullgridview, container, false);
+		mPullToRefreshHeadGridView = (PullToRefreshHeadGridView) view.findViewById(R.id.pull_refresh_grid);
+//		headview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_m_head, null);
+		return view;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,6 +66,10 @@ public class PCNavGridFragment  extends CommonPullToRefreshGridFragment<MArticle
 	 */
 	@Override
 	public void initValues() {
+//		mPullToRefreshHeadGridView.getRefreshableView().addHeaderView(headview);
+//		PCNavHeadExpendListFragmnet ffragment = PCNavHeadExpendListFragmnet.newInstance(url, true);
+//		getChildFragmentManager().beginTransaction().replace(R.id.id_m_head, ffragment).commit();
+		
 		// TODO Auto-generated method stub
 		mPCNavGridAdapter = new PCNavGridAdapter(getActivity(), list);
 		mPullToRefreshHeadGridView.setAdapter(mPCNavGridAdapter);
