@@ -224,5 +224,88 @@ public class PCNavJsoupService extends CommonService {
 		return list;
 	}
 	
-	 
+	public static List<MArticleBean> parsePagerList(String href, int pageNo) {
+		List<MArticleBean> list = new ArrayList<MArticleBean>();
+		try {
+			// href = makeURL(href, new HashMap<String, Object>() {
+			// {
+			// }
+			// });
+			Document doc;
+			doc = Jsoup.parse(href);
+			Log.i(TAG, "url = " + href);
+
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 */
+//				 Element globalnavElement = doc.select("div.main_top").first();
+				 Element ulElement = doc.select("ul").first();
+				Elements moduleElements = ulElement.select("li");
+				Elements moduleElements2 = doc.select("ul").get(1).select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						Element pElement = moduleElements.get(i);
+						 
+							MArticleBean sbean = new MArticleBean();
+							try {
+								try {
+									Element aElement = moduleElements.get(i).select("a").first();
+									if (aElement != null) {
+										String hrefa = aElement.attr("href");
+										Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+										sbean.setHref(hrefa);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								 
+
+								try {
+									Element imgElement = moduleElements.get(i).select("img").first();
+									if (imgElement != null) {
+										String src = imgElement.attr("src");
+										Log.i(TAG, "i==" + i + ";src==" + src);
+										sbean.setSrc(src);
+
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								try {
+									Element imgElement = moduleElements2.get(i).select("img").first();
+									if (imgElement != null) {
+										String alt = imgElement.attr("alt");
+										if(alt.contains("%u")){
+											alt = EscapeUnescapeUtils.unescape(alt);
+										}
+										Log.i(TAG, "i==" + i + ";alt==" + alt);
+										sbean.setAlt(alt);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+ 
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							list.add(sbean);
+						}
+					 
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

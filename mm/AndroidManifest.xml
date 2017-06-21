@@ -160,6 +160,12 @@
             android:theme="@style/Theme.PageIndicatorDefaults"
             >
         </activity>
+        <!--  mm pc  导航pager -->
+        <activity
+            android:name="com.open.mm.activity.pc.PCFocusViewPagerFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_pc_focus_pager_desp" >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"
