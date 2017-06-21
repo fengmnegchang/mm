@@ -23,7 +23,7 @@ import android.util.Log;
 
 import com.open.android.jsoup.CommonService;
 import com.open.mm.bean.m.MArticleBean;
-import com.open.mm.json.m.MArticleJson;
+import com.open.mm.bean.pc.HomeArticleBean;
 import com.open.mm.utils.EscapeUnescapeUtils;
 import com.open.mm.utils.UrlUtils;
 
@@ -297,6 +297,95 @@ public class PCNavJsoupService extends CommonService {
 							list.add(sbean);
 						}
 					 
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static List<HomeArticleBean> parseHomeList(String href, int pageNo) {
+		List<HomeArticleBean> list = new ArrayList<HomeArticleBean>();
+		try {
+			// href = makeURL(href, new HashMap<String, Object>() {
+			// {
+			// }
+			// });
+			Document doc;
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			Log.i(TAG, "url = " + href);
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				 Element globalnavElement = doc.select("div.main-left").first();
+				Elements moduleElements = globalnavElement.select("ul");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						    HomeArticleBean hbean= new HomeArticleBean();
+						    Element ulElement = moduleElements.get(i).select("ul").first();
+							Elements liElements = ulElement.select("li");
+							List<MArticleBean> mlist = new ArrayList<MArticleBean>();
+							for(int j=0;j<liElements.size();j++){
+								MArticleBean sbean = new MArticleBean();
+								try {
+									try {
+										if(liElements.get(j).attr("class").contains("column-title")){
+											hbean.setAlt(liElements.get(j).text());
+											hbean.setHref(liElements.get(j).select("a").first().attr("href"));
+											continue;
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+									
+									try {
+										Element aElement = liElements.get(j).select("a").first();
+										if (aElement != null) {
+											String hrefa = aElement.attr("href");
+											Log.i(TAG, "j==" + j + ";hrefa==" + hrefa);
+											sbean.setHref(hrefa);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+
+									try {
+										Element imgElement = liElements.get(j).select("a").first();
+										if (imgElement != null) {
+											String alt = imgElement.text();
+											Log.i(TAG, "j==" + j + ";alt==" + alt);
+											sbean.setAlt(alt);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+									
+									try {
+										Element imgElement = liElements.get(j).select("img").first();
+										if (imgElement != null) {
+											String src = imgElement.attr("src");
+											Log.i(TAG, "j==" + j + ";src==" + src);
+											sbean.setSrc(src);
+
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								mlist.add(sbean);
+							}
+							hbean.setList(mlist);
+							list.add(hbean);
+						}
+					
 				}
 
 			} catch (Exception e) {

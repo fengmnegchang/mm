@@ -59,7 +59,7 @@ public class PCTabIndicatorFragment extends MMainIndicatorFragment{
 			MSlideMenuBean bean = result.getList().get(i);
 			titleList.add(bean.getTitle());
 			if(i==0){
-				fragment = PCNavGridAddHeadFragment.newInstance(bean.getHref(),true);
+				fragment = PCHomeArticlePullListFragmnet.newInstance(bean.getHref(),true);
 			}else{
 				fragment = PCNavGridAddHeadFragment.newInstance(bean.getHref(),false);
 			}
