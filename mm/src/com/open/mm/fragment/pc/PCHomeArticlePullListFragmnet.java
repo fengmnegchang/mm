@@ -11,11 +11,18 @@
  */
 package com.open.mm.fragment.pc;
 
+import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.open.android.fragment.common.CommonPullToRefreshListFragment;
+import com.open.mm.R;
 import com.open.mm.adapter.pc.PCHomeGridAdapter;
 import com.open.mm.bean.pc.HomeArticleBean;
 import com.open.mm.json.pc.HomeArticleJson;
@@ -34,7 +41,9 @@ import com.open.mm.jsoup.pc.PCNavJsoupService;
  */
 public class PCHomeArticlePullListFragmnet extends CommonPullToRefreshListFragment<HomeArticleBean, HomeArticleJson> {
 	public PCHomeGridAdapter mPCHomeGridAdapter;
-
+	public View headview;
+	public View footview;
+	
 	public static PCHomeArticlePullListFragmnet newInstance(String url, boolean isVisibleToUser) {
 		PCHomeArticlePullListFragmnet fragment = new PCHomeArticlePullListFragmnet();
 		fragment.setFragment(fragment);
@@ -43,6 +52,15 @@ public class PCHomeArticlePullListFragmnet extends CommonPullToRefreshListFragme
 		return fragment;
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_common_pulllistview, container, false);
+		mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
+		headview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_m_head, null);
+		footview = LayoutInflater.from(getActivity()).inflate(R.layout.layout_expend_footview, null);
+		return view;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,9 +69,18 @@ public class PCHomeArticlePullListFragmnet extends CommonPullToRefreshListFragme
 	@Override
 	public void initValues() {
 		// TODO Auto-generated method stub
+		mPullToRefreshListView.getRefreshableView().addHeaderView(headview);
+		mPullToRefreshListView.getRefreshableView().addFooterView(footview);
+		
+		PCNavHeadExpendListFragmnet ffragment = PCNavHeadExpendListFragmnet.newInstance(url, true);
+		getChildFragmentManager().beginTransaction().replace(R.id.id_expend_foot, ffragment).commit();
+		
+		PCHomeHeadExpendListFragmnet hfragment = PCHomeHeadExpendListFragmnet.newInstance(url, true);
+		getChildFragmentManager().beginTransaction().replace(R.id.id_m_head, hfragment).commit();
+		
 		mPCHomeGridAdapter = new PCHomeGridAdapter(getActivity(), list);
 		mPullToRefreshListView.setAdapter(mPCHomeGridAdapter);
-		mPullToRefreshListView.setMode(Mode.BOTH);
+		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
 	}
 
 	/*

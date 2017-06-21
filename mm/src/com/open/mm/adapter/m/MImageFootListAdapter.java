@@ -54,7 +54,7 @@ public class MImageFootListAdapter extends CommonAdapter<MArticleBean>{
 		}
 		final MArticleBean bean = (MArticleBean) getItem(position);
 		if (bean != null) {
-			viewHolder.text_title.setText(bean.getAlt());
+			viewHolder.text_title.setText(position+" "+bean.getAlt());
 			 
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
