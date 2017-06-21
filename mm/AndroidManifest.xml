@@ -178,6 +178,30 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/mm_pc_image_pager_list_desp" >
         </activity>
+        <!-- main weex-->
+        <activity
+            android:name="com.open.android.weex.WeexMainActivity"
+            android:description="@string/mm_weex_main_desp" 
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            >
+        </activity>
+        
+        <activity
+            android:name="com.open.android.weex.WeexNavigatorActivity"
+            android:description="@string/mm_weex_nav_desp" 
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            >
+            <intent-filter>
+                 <action android:name="com.taobao.android.intent.action.WEEX"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.taobao.android.intent.category.WEEX"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:scheme="file"/>
+                <data android:scheme="wxpage"/>
+            </intent-filter>
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"

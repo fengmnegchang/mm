@@ -17,6 +17,14 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.open.android.adapter.DefaultWebSocketAdapterFactory;
+import com.open.android.adapter.ImageAdapter;
+import com.open.android.adapter.WXHttpAdapter;
+import com.open.android.module.WXEventModule;
+import com.open.android.module.WeexModalUIModule;
+import com.open.android.module.WeexModule;
+import com.taobao.weex.InitConfig;
+import com.taobao.weex.WXSDKEngine;
 
 /**
  *****************************************************************************************************************************************************************************
@@ -42,13 +50,13 @@ public class MMApplication extends Application {
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
         
-//        InitConfig config=new InitConfig.Builder().setHttpAdapter(new WXHttpAdapter()).setImgAdapter(new ImageAdapter()).setWebSocketAdapterFactory(new DefaultWebSocketAdapterFactory()).build();
-//        WXSDKEngine.initialize(this,config);
-//        try {
-//			WXSDKEngine.registerModule("weexModule", WeexModule.class);
-//			WXSDKEngine.registerModule("weexModalUIModule", WeexModalUIModule.class);
-//			WXSDKEngine.registerModule("weexEventModule", WXEventModule.class);
-//			WXSDKEngine.registerModule("weexJsoupModule", WeexJsoupModule.class);
+        InitConfig config=new InitConfig.Builder().setHttpAdapter(new WXHttpAdapter()).setImgAdapter(new ImageAdapter()).setWebSocketAdapterFactory(new DefaultWebSocketAdapterFactory()).build();
+        WXSDKEngine.initialize(this,config);
+        try {
+			WXSDKEngine.registerModule("weexModule", WeexModule.class);
+			WXSDKEngine.registerModule("weexModalUIModule", WeexModalUIModule.class);
+			WXSDKEngine.registerModule("weexEventModule", WXEventModule.class);
+			//WXSDKEngine.registerModule("weexJsoupModule", WeexJsoupModule.class);
 //			WXSDKEngine.registerModule("actionSheet", WXActionSheetModule.class);
 //			 // 注册 webview module
 //			WXSDKEngine.registerModule("mywebview", WeeXWebViewModule.class);
@@ -74,8 +82,8 @@ public class MMApplication extends Application {
 //			              "mystockview"
 //			            );
 //			WXSDKEngine.registerDomObject("mystockview", WeeXTextDomObject.class);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 }
