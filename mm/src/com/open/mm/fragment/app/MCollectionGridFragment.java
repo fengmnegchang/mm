@@ -29,8 +29,10 @@ import com.open.android.db.service.OpenDBService;
 import com.open.android.fragment.common.CommonPullToRefreshGridFragment;
 import com.open.mm.R;
 import com.open.mm.activity.m.MImagePullListActivity;
+import com.open.mm.activity.pc.PCImagePullListActivity;
 import com.open.mm.adapter.app.MCollectionGridAdapter;
 import com.open.mm.json.m.OpenDBJson;
+import com.open.mm.utils.UrlUtils;
 
 /**
  ***************************************************************************************************************************************************************************** 
@@ -135,7 +137,11 @@ public class MCollectionGridFragment extends CommonPullToRefreshGridFragment<Ope
 				list.get((int)id).setSelectstate(!list.get((int)id).isSelectstate());
 				mMCollectionGridAdapter.notifyDataSetChanged();
 			}else{
-				MImagePullListActivity.startMImagePullListActivity(getActivity(), list.get((int)id).getUrl());
+				if(list.get((int)id).getUrl().contains(UrlUtils.MM_PC)){
+					PCImagePullListActivity.startPCImagePullListActivity(getActivity(), list.get((int)id).getUrl());
+				}else{
+					MImagePullListActivity.startMImagePullListActivity(getActivity(), list.get((int)id).getUrl());
+				}
 			}
 		}
 	}
