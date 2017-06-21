@@ -19,8 +19,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.open.android.fragment.common.CommonPullToRefreshListFragment;
 import com.open.mm.R;
 import com.open.mm.adapter.pc.PCHomeGridAdapter;
@@ -77,6 +77,9 @@ public class PCHomeArticlePullListFragmnet extends CommonPullToRefreshListFragme
 		
 		PCHomeHeadExpendListFragmnet hfragment = PCHomeHeadExpendListFragmnet.newInstance(url, true);
 		getChildFragmentManager().beginTransaction().replace(R.id.id_m_head, hfragment).commit();
+		
+		PCFocusViewPagerFragment pfragment = PCFocusViewPagerFragment.newInstance("http://www.mm131.com/css/focus.js", true);
+		getChildFragmentManager().beginTransaction().replace(R.id.id_m_page, pfragment).commit();
 		
 		mPCHomeGridAdapter = new PCHomeGridAdapter(getActivity(), list);
 		mPullToRefreshListView.setAdapter(mPCHomeGridAdapter);
