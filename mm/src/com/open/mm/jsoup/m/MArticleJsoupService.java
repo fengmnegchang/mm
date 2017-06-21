@@ -711,7 +711,7 @@ public class MArticleJsoupService extends CommonService {
 									if (aElement != null) {
 										String hrefa = aElement.attr("href");
 										Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
-										sbean.setHref(hrefa);
+										sbean.setHref(href);
 									}
 								} catch (Exception e) {
 									e.printStackTrace();

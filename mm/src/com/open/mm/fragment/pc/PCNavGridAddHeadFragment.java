@@ -31,6 +31,7 @@ import com.open.andenginetask.Callback;
 import com.open.android.fragment.common.CommonPullToRefreshGridFragment;
 import com.open.android.view.ExpendListView;
 import com.open.mm.R;
+import com.open.mm.activity.pc.PCImagePullListActivity;
 import com.open.mm.adapter.m.MImageFootListAdapter;
 import com.open.mm.adapter.pc.PCNavGridAdapter;
 import com.open.mm.bean.m.MArticleBean;
@@ -157,7 +158,7 @@ public class PCNavGridAddHeadFragment  extends CommonPullToRefreshGridFragment<M
 		// TODO Auto-generated method stub
 		super.onItemClick(parent, view, position, id);
 		if(id!=-1 && list.get((int)id)!=null){
-			 
+			PCImagePullListActivity.startPCImagePullListActivity(getActivity(), list.get((int)id).getHref());
 		}
 	}
 	
