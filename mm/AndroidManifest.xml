@@ -166,6 +166,12 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:description="@string/mm_pc_focus_pager_desp" >
         </activity>
+         <!-- mm pc看图 -->
+        <activity
+            android:name="com.open.mm.activity.pc.PCImagePullListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_pc_image_list_desp" >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"
