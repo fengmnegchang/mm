@@ -23,6 +23,7 @@ import com.open.android.adapter.WXHttpAdapter;
 import com.open.android.module.WXEventModule;
 import com.open.android.module.WeexModalUIModule;
 import com.open.android.module.WeexModule;
+import com.open.mm.module.WeexJsoupModule;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
 
@@ -56,7 +57,7 @@ public class MMApplication extends Application {
 			WXSDKEngine.registerModule("weexModule", WeexModule.class);
 			WXSDKEngine.registerModule("weexModalUIModule", WeexModalUIModule.class);
 			WXSDKEngine.registerModule("weexEventModule", WXEventModule.class);
-			//WXSDKEngine.registerModule("weexJsoupModule", WeexJsoupModule.class);
+			WXSDKEngine.registerModule("weexJsoupModule", WeexJsoupModule.class);
 //			WXSDKEngine.registerModule("actionSheet", WXActionSheetModule.class);
 //			 // 注册 webview module
 //			WXSDKEngine.registerModule("mywebview", WeeXWebViewModule.class);
