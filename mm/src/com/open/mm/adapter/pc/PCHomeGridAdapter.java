@@ -28,6 +28,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.open.android.adapter.CommonAdapter;
 import com.open.mm.R;
 import com.open.mm.activity.m.MImagePullListActivity;
+import com.open.mm.activity.pc.PCImagePullListActivity;
 import com.open.mm.bean.m.MArticleBean;
 import com.open.mm.bean.pc.HomeArticleBean;
 
@@ -81,6 +82,7 @@ public class PCHomeGridAdapter extends CommonAdapter<HomeArticleBean> {
 			view.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
+					PCImagePullListActivity.startPCImagePullListActivity(mContext, bean.getHref());
 				}
 			});
 			viewHolder.lay_grid.addView(view, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));

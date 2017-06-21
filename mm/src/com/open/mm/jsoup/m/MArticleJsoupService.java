@@ -648,6 +648,127 @@ public class MArticleJsoupService extends CommonService {
 	}
 	
 	
+	public static MArticleJson parsePCImagePagerList(String href,int pageNo) {
+		MArticleJson mMArticleJson = new MArticleJson();
+		List<MArticleBean> list = new ArrayList<MArticleBean>();
+		int currentposition = 0;
+		try {
+			// href = makeURL(href, new HashMap<String, Object>() {
+			// {
+			// }
+			// });
+//			if(pageNo>1){
+//				//http://m.mm131.com/xinggan/2847.html
+//				//http://m.mm131.com/xinggan/2847_2.html
+//				href = href.replace(".html", "_")+pageNo+".html";
+//			}
+//			
+			Document doc;
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			Log.i(TAG, "url = " + href);
+
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 */
+				/**
+				 * 获取分页信息
+				 */
+				try {
+					Element globalnavElement = doc.select("div.content-page").first();
+					if(globalnavElement!=null){
+						Element pElement = globalnavElement.select("span.page-ch").first();
+						String pager = pElement.text().replace("共", "").replace("页", "");
+						Element nElement = globalnavElement.select("span.page_now").first();
+						currentposition = Integer.parseInt(nElement.text());
+						
+						int tposition = Integer.parseInt(pager);
+						mMArticleJson.setCurrentPosition(currentposition);
+						mMArticleJson.setMaxPage(tposition);
+						for(int i=0;i<tposition;i++){
+							MArticleBean sbean = new MArticleBean();
+							sbean.setHref(href.replace(".html", "_")+(i+1)+".html");
+							list.add(sbean);
+						}
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				// Element globalnavElement =
+				// doc.select("div.adFocusHtml").first();
+				Elements moduleElements = doc.select("div.content-pic");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+						Element pElement = moduleElements.get(i);
+						 
+							MArticleBean sbean = new MArticleBean();
+							try {
+								try {
+									Element aElement = moduleElements.get(i).select("a").first();
+									if (aElement != null) {
+										String hrefa = aElement.attr("href");
+										Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+										sbean.setHref(hrefa);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								 
+
+								try {
+									Element imgElement = moduleElements.get(i).select("img").first();
+									if (imgElement != null) {
+										String alt = imgElement.attr("alt");
+										if(alt.contains("%u")){
+											alt = EscapeUnescapeUtils.unescape(alt);
+										}
+										Log.i(TAG, "i==" + i + ";alt==" + alt);
+										sbean.setAlt(alt);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								try {
+									Element imgElement = moduleElements.get(i).select("img").first();
+									if (imgElement != null) {
+										String dataimg = imgElement.attr("src");
+										Log.i(TAG, "i==" + i + ";dataimg==" + dataimg);
+										sbean.setDataimg(dataimg);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								 
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							if(currentposition>0){
+								currentposition = currentposition-1;
+							}
+							list.set(currentposition, sbean);
+						}
+					 
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mMArticleJson.setList(list);
+		return mMArticleJson;
+	}
+	
+	
 	public static List<MArticleBean> parsePCImageList(String href, int pageNo) {
 		List<MArticleBean> list = new ArrayList<MArticleBean>();
 		try {

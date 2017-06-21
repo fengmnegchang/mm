@@ -25,6 +25,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.open.android.adapter.CommonPagerAdapter;
 import com.open.mm.R;
+import com.open.mm.activity.pc.PCImagePullListActivity;
 import com.open.mm.bean.m.MArticleBean;
 
 /**
@@ -61,6 +62,7 @@ public class PCFocusViewPagerAdapter extends CommonPagerAdapter<MArticleBean> {
 				@Override
 				public void onClick(View v) {
 //					YokaWebViewActivity.startYokaWebViewActivity(mContext, bean.getHref());
+					PCImagePullListActivity.startPCImagePullListActivity(mContext, bean.getHref());
 				}
 			});
 		}

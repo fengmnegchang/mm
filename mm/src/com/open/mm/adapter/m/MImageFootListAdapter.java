@@ -22,7 +22,9 @@ import android.widget.TextView;
 import com.open.android.adapter.CommonAdapter;
 import com.open.mm.R;
 import com.open.mm.activity.m.MImagePullListActivity;
+import com.open.mm.activity.pc.PCImagePullListActivity;
 import com.open.mm.bean.m.MArticleBean;
+import com.open.mm.utils.UrlUtils;
 
 /**
  *****************************************************************************************************************************************************************************
@@ -59,7 +61,12 @@ public class MImageFootListAdapter extends CommonAdapter<MArticleBean>{
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					MImagePullListActivity.startMImagePullListActivity(mContext, bean.getHref());
+					if(bean.getHref().contains(UrlUtils.MM_PC)){
+						PCImagePullListActivity.startPCImagePullListActivity(mContext, bean.getHref());
+					}else{
+						MImagePullListActivity.startMImagePullListActivity(mContext, bean.getHref());
+					}
+					
 				}
 			});
 

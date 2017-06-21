@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.open.mm.R;
 import com.open.mm.activity.m.MImagePagerAdapterFragmentActivity;
+import com.open.mm.activity.pc.PCImagePagerAdapterFragmentActivity;
 import com.open.mm.adapter.m.MImageListAdapter;
 import com.open.mm.fragment.m.MImageFootExpendListFragmnet;
 import com.open.mm.fragment.m.MImageHeadFragmnet;
@@ -87,6 +88,10 @@ public class PCImagePullListFragmnet extends MImagePullListFragmnet {
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		// TODO Auto-generated method stub
 		if(id!=-1 && list.get((int)id)!=null){
+			MArticleJson mMArticleJson = new MArticleJson();
+			mMArticleJson.setList(list);
+			mMArticleJson.setCurrentPosition((int)id);
+			PCImagePagerAdapterFragmentActivity.startPCImagePagerAdapterFragmentActivity(getActivity(), list.get(0).getHref(), mMArticleJson);
 		}
 	}
 }

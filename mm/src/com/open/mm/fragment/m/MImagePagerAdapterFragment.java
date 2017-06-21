@@ -52,13 +52,13 @@ public class MImagePagerAdapterFragment extends BaseV4Fragment<MArticleJson, MIm
 		return fragment;
 	}
 	
-	private ViewPager viewpager;
+	public ViewPager viewpager;
 	public MImagePagerAdapter mMImagePagerAdapter;
-	private List<MArticleBean> list = new ArrayList<MArticleBean>();
-	private String url = UrlUtils.MM_M_IMAGE;
-	private WeakActivityReferenceHandler weakActivityReferenceHandler;
-	private int position;
-	private TextView text_page_foot;
+	public List<MArticleBean> list = new ArrayList<MArticleBean>();
+	public String url = UrlUtils.MM_M_IMAGE;
+	public WeakActivityReferenceHandler weakActivityReferenceHandler;
+	public int position;
+	public TextView text_page_foot;
 	
 	public static MImagePagerAdapterFragment newInstance(String url, boolean isVisibleToUser,WeakActivityReferenceHandler weakActivityReferenceHandler) {
 		MImagePagerAdapterFragment fragment = new MImagePagerAdapterFragment();
