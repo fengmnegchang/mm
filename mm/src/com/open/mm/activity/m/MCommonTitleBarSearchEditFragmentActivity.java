@@ -45,6 +45,10 @@ public class MCommonTitleBarSearchEditFragmentActivity extends MCommonTitleBarAc
 		} else {
 			url = UrlUtils.MM_M;
 		}
+		setCenterTextValue("搜索");
+		setRightVisivableGone();
+		setLeftImageResId(R.drawable.left01);
+		setLeftTextVisivable(false);
 		addfragment();
 	}
 	/*

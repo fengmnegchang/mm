@@ -45,6 +45,10 @@ public class MImagePullListActivity extends MCommonTitleBarActivity{
 		} else {
 			url = UrlUtils.MM_M_IMAGE;
 		}
+		setCenterTextValue("MM131");
+		setRightVisivableGone();
+		setLeftImageResId(R.drawable.left01);
+		setLeftTextVisivable(false);
 		addfragment();
 	}
 	/*

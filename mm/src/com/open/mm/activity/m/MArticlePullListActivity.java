@@ -46,6 +46,10 @@ public class MArticlePullListActivity extends MCommonTitleBarActivity{
 		} else {
 			url = UrlUtils.MM_M;
 		}
+		setCenterTextValue("MM131");
+		setRightVisivableGone();
+		setLeftImageResId(R.drawable.left01);
+		setLeftTextVisivable(false);
 		addfragment();
 	}
 	/*
