@@ -27,6 +27,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.open.android.react.packages.CommonReactPackage;
+import com.open.mm.react.packages.MMReactPackage;
 
 /**
  *****************************************************************************************************************************************************************************
@@ -65,7 +66,8 @@ public class MMApplication extends Application implements ReactApplication{
 			// new MainReactPackage()
 			// );
 			return Arrays.<ReactPackage> asList(new MainReactPackage(), // 这个是自动创建
-					new CommonReactPackage() // 这个类是我们创建的
+					new CommonReactPackage(), // 这个类是我们创建的
+					new MMReactPackage()
 					);
 		}
 	};

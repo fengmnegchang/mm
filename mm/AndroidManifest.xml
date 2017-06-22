@@ -201,6 +201,15 @@
         </activity>
          <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" 
              android:description="@string/mm_react_setting_desp"/>
+         
+          <!-- mm mmreact  -->
+        <activity
+            android:name="com.open.mm.activity.react.MMRTCReactActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:label="@string/app_name" 
+            android:description="@string/mm_mmreact_main_list_desp"
+            >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"
