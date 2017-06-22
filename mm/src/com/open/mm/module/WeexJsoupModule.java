@@ -22,7 +22,9 @@ import com.open.andenginetask.Callable;
 import com.open.andenginetask.Callback;
 import com.open.android.module.WeexBaseJsoupModule;
 import com.open.mm.json.m.MArticleJson;
+import com.open.mm.json.m.MSlideMenuJson;
 import com.open.mm.jsoup.m.MArticleJsoupService;
+import com.open.mm.jsoup.m.MLeftMenuJsoupService;
 import com.open.mm.utils.UrlUtils;
 import com.taobao.weex.bridge.WXBridgeManager;
 import com.taobao.weex.common.WXModuleAnno;
@@ -49,7 +51,6 @@ public class WeexJsoupModule extends WeexBaseJsoupModule {
 	public String TAG = WeexBaseJsoupModule.class.getSimpleName();
 
 	/***
-	 * 头部pager导航
 	 * 
 	 * @param params
 	 * @param callback
@@ -146,6 +147,39 @@ public class WeexJsoupModule extends WeexBaseJsoupModule {
 			// callback, gson.toJson(mIndexFocusJson));
 			// }
 			// }).start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/***
+	 * @param params
+	 * @param callback
+	 */
+	@SuppressWarnings("unchecked")
+	@WXModuleAnno(moduleMethod = true, runOnUIThread = true)
+	public void mleftmenu(final String params, final String callback) {
+		Log.d(TAG, "mleftmenu ========" + params);
+		try {
+			doAsync(new CallEarliest<MSlideMenuJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MSlideMenuJson>() {
+				@Override
+				public MSlideMenuJson call() throws Exception {
+					MSlideMenuJson mMSlideMenuJson = new MSlideMenuJson();
+					mMSlideMenuJson.setList(MLeftMenuJsoupService.parseList(params, 1));
+					return mMSlideMenuJson;
+				}
+			}, new Callback<MSlideMenuJson>() {
+				@Override
+				public void onCallback(MSlideMenuJson result) {
+					Gson gson = new Gson();
+					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
+				}
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
