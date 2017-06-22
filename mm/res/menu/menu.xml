@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.open.mm.activity.react.MMRTCReactActivity" >
+
+    <item
+        android:id="@+id/action_settings1"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="action"/>
+
+</menu>

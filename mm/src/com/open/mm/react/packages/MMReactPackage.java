@@ -23,6 +23,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.open.mm.react.modules.MMCircleManager;
 import com.open.mm.react.modules.MMDialogModule;
+import com.open.mm.react.modules.ReactMMJsoupModule;
 
 /**
  *****************************************************************************************************************************************************************************
@@ -51,7 +52,8 @@ public class MMReactPackage implements ReactPackage {
 	public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
 		List<NativeModule> modules = new ArrayList<NativeModule>();
 //		modules.add(new ToastModule(reactContext));
-		modules.add(new MMDialogModule(reactContext));
+//		modules.add(new MMDialogModule(reactContext));
+		modules.add(new ReactMMJsoupModule(reactContext));
 		return modules;
 	}
 
@@ -64,7 +66,7 @@ public class MMReactPackage implements ReactPackage {
 	@Override
 	public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
 		return Arrays.<ViewManager> asList(
-				new MMCircleManager()
+//				new MMCircleManager()
 //				new VideoViewManager(),
 //				new RCTVideoViewManager(),
 //				new RCTReactImageManager(),
