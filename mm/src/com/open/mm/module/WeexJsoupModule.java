@@ -11,6 +11,7 @@
  */
 package com.open.mm.module;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -176,6 +177,56 @@ public class WeexJsoupModule extends WeexBaseJsoupModule {
 			}, new Callback<MSlideMenuJson>() {
 				@Override
 				public void onCallback(MSlideMenuJson result) {
+					Gson gson = new Gson();
+					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/***
+	 * 
+	 * @param params
+	 * @param callback
+	 */
+	@SuppressWarnings("unchecked")
+	@WXModuleAnno(moduleMethod = true, runOnUIThread = true)
+	public void mSearch(final String params, final String callback) {
+		Log.d(TAG, "mSearch ========" + params);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = JSON.parseObject(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String url = jsonObject.getString("url");
+		final int pageNo = jsonObject.getInteger("pageNo");
+		String text = jsonObject.getString("text");
+		try {
+			text = URLEncoder.encode(text, "gb2312");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//http://m.mm131.com/search.php?text=%C3%C3%C3%C3&page=
+		final String href = url + "text="+text+"&page=";
+		try {
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					mMArticleJson.setList(MArticleJsoupService.parseSearchList(href, pageNo));
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
 					Gson gson = new Gson();
 					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
 				}

@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.open.android.adapter.DefaultWebSocketAdapterFactory;
 import com.open.android.adapter.ImageAdapter;
 import com.open.android.adapter.WXHttpAdapter;
+import com.open.android.module.WXNavigatorModule;
 import com.open.android.module.WeexModalUIModule;
 import com.open.android.module.WeexModule;
 import com.open.mm.module.WeeXEventModule;
@@ -58,6 +59,7 @@ public class MMApplication extends Application {
 			WXSDKEngine.registerModule("weexModalUIModule", WeexModalUIModule.class);
 			WXSDKEngine.registerModule("weexEventModule", WeeXEventModule.class);
 			WXSDKEngine.registerModule("weexJsoupModule", WeexJsoupModule.class);
+			WXSDKEngine.registerModule("weexNavigatorModule", WXNavigatorModule.class);
 //			WXSDKEngine.registerModule("actionSheet", WXActionSheetModule.class);
 //			 // 注册 webview module
 //			WXSDKEngine.registerModule("mywebview", WeeXWebViewModule.class);
