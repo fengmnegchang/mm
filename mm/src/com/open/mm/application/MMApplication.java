@@ -11,20 +11,22 @@
  */
 package com.open.mm.application;
 
+import java.util.Arrays;
+import java.util.List;
+
 import android.app.Application;
 
+import com.facebook.drawee.BuildConfig;
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.react.ReactPackage;
+import com.facebook.react.shell.MainReactPackage;
+import com.facebook.soloader.SoLoader;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.open.android.adapter.DefaultWebSocketAdapterFactory;
-import com.open.android.adapter.ImageAdapter;
-import com.open.android.adapter.WXHttpAdapter;
-import com.open.android.module.WXEventModule;
-import com.open.android.module.WeexModalUIModule;
-import com.open.android.module.WeexModule;
-import com.taobao.weex.InitConfig;
-import com.taobao.weex.WXSDKEngine;
+import com.open.android.react.packages.CommonReactPackage;
 
 /**
  *****************************************************************************************************************************************************************************
@@ -37,11 +39,11 @@ import com.taobao.weex.WXSDKEngine;
  * @description:
  *****************************************************************************************************************************************************************************
  */
-public class MMApplication extends Application {
+public class MMApplication extends Application implements ReactApplication{
     @Override
     public void onCreate() {
         super.onCreate();
-
+        SoLoader.init(this, /* native exopackage */ false);
         //创建默认的ImageLoader配置参数
         ImageLoaderConfiguration configuration =   new ImageLoaderConfiguration.Builder(this).threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator()).diskCacheSize(50 * 1024 * 1024) // 50 Mb
@@ -49,41 +51,28 @@ public class MMApplication extends Application {
                 .build();
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
-        
-        InitConfig config=new InitConfig.Builder().setHttpAdapter(new WXHttpAdapter()).setImgAdapter(new ImageAdapter()).setWebSocketAdapterFactory(new DefaultWebSocketAdapterFactory()).build();
-        WXSDKEngine.initialize(this,config);
-        try {
-			WXSDKEngine.registerModule("weexModule", WeexModule.class);
-			WXSDKEngine.registerModule("weexModalUIModule", WeexModalUIModule.class);
-			WXSDKEngine.registerModule("weexEventModule", WXEventModule.class);
-			//WXSDKEngine.registerModule("weexJsoupModule", WeexJsoupModule.class);
-//			WXSDKEngine.registerModule("actionSheet", WXActionSheetModule.class);
-//			 // 注册 webview module
-//			WXSDKEngine.registerModule("mywebview", WeeXWebViewModule.class);
-//	        // 注册 webview 组件
-//			WXSDKEngine.registerComponent("web", WeeXWeb.class);
-//			
-//			WXSDKEngine.registerComponent("myinput", MyInput.class);
-//			WXSDKEngine.registerComponent("myrichtext",RichText.class);
-//			WXSDKEngine.registerComponent(
-//				        new SimpleComponentHolder(
-//				          WeeXSlider.class,
-//				          new WeeXSlider.Creator()
-//				        ),
-//				        true,
-//				       "mypager"
-//				      );
-//			WXSDKEngine.registerComponent(
-//			        new SimpleComponentHolder(
-//			        		WeeXText.class,
-//			                new WeeXText.Creator()
-//			              ),
-//			              false,
-//			              "mystockview"
-//			            );
-//			WXSDKEngine.registerDomObject("mystockview", WeeXTextDomObject.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
     }
+    
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+		@Override
+		protected boolean getUseDeveloperSupport() {
+			return BuildConfig.DEBUG;
+		}
+
+		@Override
+		protected List<ReactPackage> getPackages() {
+			// return Arrays.<ReactPackage>asList(
+			// new MainReactPackage()
+			// );
+			return Arrays.<ReactPackage> asList(new MainReactPackage(), // 这个是自动创建
+					new CommonReactPackage() // 这个类是我们创建的
+					);
+		}
+	};
+
+	@Override
+	public ReactNativeHost getReactNativeHost() {
+		return mReactNativeHost;
+	}
+
 }

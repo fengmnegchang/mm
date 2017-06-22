@@ -26,4 +26,8 @@
 	<string name="mm_pc_image_pager_list_desp">mm pc看图pager</string>
 	<string name="mm_weex_main_desp">mm weex main</string>
 	<string name="mm_weex_nav_desp">mm weex  nav</string>
+	
+	<string name="mm_react_main_list_desp">mm react main</string>
+	<string name="mm_react_act_list_desp">mm react nav</string>
+	<string name="mm_react_setting_desp">mm react setting</string>
 </resources>
