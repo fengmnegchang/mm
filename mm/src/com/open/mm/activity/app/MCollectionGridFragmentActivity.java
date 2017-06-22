@@ -13,8 +13,10 @@ package com.open.mm.activity.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.view.Window;
 
 import com.open.mm.R;
 import com.open.mm.activity.m.MCommonTitleBarActivity;
@@ -34,6 +36,14 @@ import com.open.mm.utils.UrlUtils;
  */
 public class MCollectionGridFragmentActivity extends MCommonTitleBarActivity{
 	public boolean editable;
+	
+//	@Override
+//	public void onCreate(Bundle savedInstanceState) {
+//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		super.onCreate(savedInstanceState);
+//		setContentView(R.layout.activity_m_common_titlebar);
+//		init();
+//	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -42,7 +52,7 @@ public class MCollectionGridFragmentActivity extends MCommonTitleBarActivity{
 	@Override
 	protected void initValue() {
 		// TODO Auto-generated method stub
-		super.initValue();
+//		super.initValue();
 		if (getIntent().getStringExtra("URL") != null) {
 			url = getIntent().getStringExtra("URL");
 		} else {
