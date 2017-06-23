@@ -31,4 +31,5 @@
 	<string name="mm_react_act_list_desp">mm react nav</string>
 	<string name="mm_react_setting_desp">mm react setting</string>
 	<string name="mm_mmreact_main_list_desp">mm mmreact </string>
+	<string name="mm_remote_list_desp">mm remote react </string>
 </resources>

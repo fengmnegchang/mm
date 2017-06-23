@@ -210,6 +210,14 @@
             android:description="@string/mm_mmreact_main_list_desp"
             >
         </activity>
+        <!-- mm   remote list  -->
+        <activity
+            android:name="com.open.mm.activity.react.ReactListActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:label="@string/app_name" 
+            android:description="@string/mm_remote_list_desp"
+            >
+        </activity>
         <!-- 所有类列表 -->
         <activity
             android:name="com.open.android.activity.common.CommonALLActivity"
