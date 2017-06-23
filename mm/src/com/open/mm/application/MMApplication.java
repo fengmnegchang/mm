@@ -14,10 +14,14 @@ package com.open.mm.application;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import android.app.Application;
 
 import com.facebook.drawee.BuildConfig;
+import com.facebook.react.LifecycleState;
 import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -40,7 +44,8 @@ import com.open.mm.react.packages.MMReactPackage;
  * @description:
  *****************************************************************************************************************************************************************************
  */
-public class MMApplication extends Application implements ReactApplication{
+//implements ReactApplication
+public class MMApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -54,27 +59,86 @@ public class MMApplication extends Application implements ReactApplication{
         ImageLoader.getInstance().init(configuration);
     }
     
-    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-		@Override
-		protected boolean getUseDeveloperSupport() {
-			return BuildConfig.DEBUG;
-		}
-
-		@Override
-		protected List<ReactPackage> getPackages() {
-			// return Arrays.<ReactPackage>asList(
-			// new MainReactPackage()
-			// );
-			return Arrays.<ReactPackage> asList(new MainReactPackage(), // 这个是自动创建
-					new CommonReactPackage(), // 这个类是我们创建的
-					new MMReactPackage()
-					);
-		}
-	};
-
-	@Override
-	public ReactNativeHost getReactNativeHost() {
-		return mReactNativeHost;
-	}
+//    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+//		@Override
+//		protected boolean getUseDeveloperSupport() {
+//			return BuildConfig.DEBUG;
+//		}
+//
+//		@Override
+//		protected List<ReactPackage> getPackages() {
+//			// return Arrays.<ReactPackage>asList(
+//			// new MainReactPackage()
+//			// );
+//			return Arrays.<ReactPackage> asList(new MainReactPackage(), // 这个是自动创建
+//					new CommonReactPackage(), // 这个类是我们创建的
+//					new MMReactPackage()
+//					);
+//		}
+//
+//		/* (non-Javadoc)
+//		 * @see com.facebook.react.ReactNativeHost#createReactInstanceManager()
+//		 */
+//		@Override
+//		protected ReactInstanceManager createReactInstanceManager() {
+//			// TODO Auto-generated method stub
+//			ReactInstanceManager mReactInstanceManager = ReactInstanceManager.builder()
+//					.setApplication(MMApplication.this)
+//					.setBundleAssetName(getBundleAssetName())
+//					.setJSMainModuleName(getJSMainModuleName())
+//					.addPackage(new MainReactPackage())
+////					.addPackage(new CommonReactPackage())
+//					.addPackage(new MMReactPackage())
+//					.setUseDeveloperSupport(BuildConfig.DEBUG)
+//					.setInitialLifecycleState(LifecycleState.RESUMED).build();
+//			return mReactInstanceManager;
+////			return super.createReactInstanceManager();
+//		}
+//
+//		/* (non-Javadoc)
+//		 * @see com.facebook.react.ReactNativeHost#getBundleAssetName()
+//		 */
+//		@Override
+//		@Nullable
+//		protected String getBundleAssetName() {
+//			// TODO Auto-generated method stub
+//			return super.getBundleAssetName();
+//		}
+//
+//		/* (non-Javadoc)
+//		 * @see com.facebook.react.ReactNativeHost#getJSBundleFile()
+//		 */
+//		@Override
+//		@Nullable
+//		protected String getJSBundleFile() {
+//			// TODO Auto-generated method stub
+//			return super.getJSBundleFile();
+//		}
+//
+//		/* (non-Javadoc)
+//		 * @see com.facebook.react.ReactNativeHost#getJSMainModuleName()
+//		 */
+//		@Override
+//		protected String getJSMainModuleName() {
+//			// TODO Auto-generated method stub
+//			return super.getJSMainModuleName();
+//		}
+//
+//		/* (non-Javadoc)
+//		 * @see com.facebook.react.ReactNativeHost#getReactInstanceManager()
+//		 */
+//		@Override
+//		public ReactInstanceManager getReactInstanceManager() {
+//			// TODO Auto-generated method stub
+//			return super.getReactInstanceManager();
+//		}
+//		
+//		
+//	};
+//
+//	@Override
+//	public ReactNativeHost getReactNativeHost() {
+//		return mReactNativeHost;
+//	}
 
 }

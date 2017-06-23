@@ -107,8 +107,8 @@ public class MMRTCReactActivity extends AppCompatActivity implements DefaultHard
 				.addPackage(new MMReactPackage())
 				.setUseDeveloperSupport(BuildConfig.DEBUG)
 				.setInitialLifecycleState(LifecycleState.RESUMED).build();
+		mReactInstanceManager.getDevSupportManager().reloadSettings();
 		mReactRootView.startReactApplication(mReactInstanceManager, moduleName, null);
-
 		setContentView(mReactRootView);
 	}
 
@@ -133,6 +133,7 @@ public class MMRTCReactActivity extends AppCompatActivity implements DefaultHard
 		if (mReactInstanceManager != null) {
 			mReactInstanceManager.onHostResume(this, this);
 		}
+		
 	}
 
 	@Override
@@ -141,6 +142,13 @@ public class MMRTCReactActivity extends AppCompatActivity implements DefaultHard
 
 		if (mReactInstanceManager != null) {
 			mReactInstanceManager.onHostDestroy();
+			mReactInstanceManager.destroy();
+			mReactInstanceManager = null;
+		}
+		
+		if(mReactRootView!=null){
+			mReactRootView.unmountReactApplication();
+			mReactRootView = null;
 		}
 	}
 
@@ -187,6 +195,7 @@ public class MMRTCReactActivity extends AppCompatActivity implements DefaultHard
 
 	public static void startMMRTCReactActivity(Context context, String bundleAssetName, String jSMainModuleName, String moduleName) {
 		Intent intent = new Intent();
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setClass(context, MMRTCReactActivity.class);
 		intent.putExtra("bundleAssetName", bundleAssetName);
 		intent.putExtra("jSMainModuleName", jSMainModuleName);

@@ -20,7 +20,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.open.android.react.RCTReactActivity;
 import com.open.mm.R;
 import com.open.mm.adapter.react.ReactAdapter;
 import com.open.mm.bean.react.ReactBean;
@@ -67,6 +67,7 @@ public class ReactListActivity extends AppCompatActivity {
 				if (id != -1 && list.get((int) id) != null) {
 					ReactBean bean = list.get((int) id);
 					MMRTCReactActivity.startMMRTCReactActivity(ReactListActivity.this, bean.getBundleAssetName(), bean.getjSMainModuleName(), bean.getModuleName());
+//					RCTReactActivity.startRCTReactActivity(ReactListActivity.this, bean.getBundleAssetName(), bean.getjSMainModuleName(), bean.getModuleName());
 				}
 			}
 		});
