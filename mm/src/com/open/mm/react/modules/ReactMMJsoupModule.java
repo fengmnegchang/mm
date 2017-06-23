@@ -22,10 +22,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.WritableMap;
 import com.google.gson.Gson;
 import com.open.andenginetask.CallEarliest;
 import com.open.andenginetask.Callable;
@@ -170,6 +168,153 @@ public class ReactMMJsoupModule extends ReactBaseJsoupModule{
 				;
 				requestQueue.add(jsonObjectRequest);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorCallback.invoke("error",e.toString());
+		}
+	}
+	
+	/***
+	 * @param params
+	 * @param callback
+	 */
+	@ReactMethod
+	public void msearch(final String params, final com.facebook.react.bridge.Callback successCallback,final com.facebook.react.bridge.Callback errorCallback) {
+		Log.d(getName(), "msearch ========" + params);
+		try {
+			JSONObject jsonObject = null;
+			try {
+				jsonObject = JSONObject.fromObject(params);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			final String url = jsonObject.getString("url");
+			final int pageNo = jsonObject.getInt("pageNo");
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					mMArticleJson.setList(MArticleJsoupService.parseSearchList(url, pageNo));
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					successCallback.invoke("data",gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorCallback.invoke("error",e.toString());
+		}
+	}
+	
+	
+	/***
+	 * @param params
+	 * @param callback
+	 */
+	@ReactMethod
+	public void mimagehead(final String params, final com.facebook.react.bridge.Callback successCallback,final com.facebook.react.bridge.Callback errorCallback) {
+		Log.d(getName(), "mimagehead ========" + params);
+		try {
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					mMArticleJson.setList(MArticleJsoupService.parseImageList(params, 1));
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					successCallback.invoke("data",gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorCallback.invoke("error",e.toString());
+		}
+	}
+	
+	/***
+	 * @param params
+	 * @param callback
+	 */
+	@ReactMethod
+	public void mimagefoot(final String params, final com.facebook.react.bridge.Callback successCallback,final com.facebook.react.bridge.Callback errorCallback) {
+		Log.d(getName(), "mimagefoot ========" + params);
+		try {
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					mMArticleJson.setList(MArticleJsoupService.parseFootList(params, 1));
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					successCallback.invoke("data",gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorCallback.invoke("error",e.toString());
+		}
+	}
+	
+	
+	/***
+	 * 
+	 * @param params
+	 * @param callback
+	 */
+	@ReactMethod
+	public void mimagelist(final String params, final com.facebook.react.bridge.Callback successCallback,final com.facebook.react.bridge.Callback errorCallback) {
+		Log.d(getName(), "mimagelist ========" + params);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = JSONObject.fromObject(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		final String url = jsonObject.getString("url");
+		final int pageNo = jsonObject.getInt("pageNo");
+		try {
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					mMArticleJson.setList(MArticleJsoupService.parseImageList(url, pageNo));
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					successCallback.invoke("data",gson.toJson(result));
+				}
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorCallback.invoke("error",e.toString());
