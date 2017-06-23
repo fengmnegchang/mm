@@ -103,7 +103,7 @@ public class MMRTCReactActivity extends AppCompatActivity implements DefaultHard
 				.setBundleAssetName(bundleAssetName)
 				.setJSMainModuleName(jSMainModuleName)
 				.addPackage(new MainReactPackage())
-				.addPackage(new CommonReactPackage())
+//				.addPackage(new CommonReactPackage())
 				.addPackage(new MMReactPackage())
 				.setUseDeveloperSupport(BuildConfig.DEBUG)
 				.setInitialLifecycleState(LifecycleState.RESUMED).build();
