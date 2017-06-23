@@ -33,7 +33,9 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 
 /**
  ***************************************************************************************************************************************************************************** 
- * 
+ * http://localhost:8081/index.android.bundle?platform=android
+ * react-native start 
+ * adb reverse tcp:8081 tcp:8081
  * @author :fengguangjing
  * @createTime:2017-6-22下午4:08:01
  * @version:4.2.4
