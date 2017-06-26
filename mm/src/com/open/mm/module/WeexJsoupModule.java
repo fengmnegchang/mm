@@ -11,6 +11,12 @@
  */
 package com.open.mm.module;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +30,10 @@ import com.open.andenginetask.Callback;
 import com.open.android.module.WeexBaseJsoupModule;
 import com.open.mm.json.m.MArticleJson;
 import com.open.mm.json.m.MSlideMenuJson;
+import com.open.mm.json.pc.HomeArticleJson;
 import com.open.mm.jsoup.m.MArticleJsoupService;
 import com.open.mm.jsoup.m.MLeftMenuJsoupService;
+import com.open.mm.jsoup.pc.PCNavJsoupService;
 import com.open.mm.utils.UrlUtils;
 import com.taobao.weex.bridge.WXBridgeManager;
 import com.taobao.weex.common.WXModuleAnno;
@@ -380,6 +388,177 @@ public class WeexJsoupModule extends WeexBaseJsoupModule {
 			}, new Callback<MArticleJson>() {
 				@Override
 				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/***
+	 * 
+	 * @param params
+	 * @param callback
+	 */
+	@SuppressWarnings("unchecked")
+	@WXModuleAnno(moduleMethod = true, runOnUIThread = true)
+	public void pcmainheadpager(final String params, final String callback) {
+		Log.d(TAG, "pcmainheadpager ========" + params);
+		try {
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					//读取asserts文件
+					try {  
+						//Return an AssetManager instance for your application's package  
+//			            InputStream is = getActivity().getAssets().open("page");  
+//			            int size = is.available();  
+//			            // Read the entire asset into a local byte buffer.  
+//			            byte[] buffer = new byte[size];  
+//			            is.read(buffer);  
+//			            is.close();  
+//			            // Convert the buffer into a string.  
+//			            String text = new String(buffer, "UTF-8");  
+						
+						URL urll= new URL(params);  
+			            HttpURLConnection conn=(HttpURLConnection)urll.openConnection();  
+			            //取得inputStream，并进行读取  
+			            InputStream input=conn.getInputStream();  
+			            BufferedReader in=new BufferedReader(new InputStreamReader(input));  
+			            String line=null;  
+			            StringBuffer sb=new StringBuffer();  
+			            while((line=in.readLine())!=null){  
+			                sb.append(line);  
+			            }  
+			            System.out.println(sb.toString());  
+			            
+			            String  text = sb.toString().replace("document.writeln(\"", "").replace("\");","").replace("\\","");
+			            // Finally stick the string into the text view.  
+			            mMArticleJson.setList(PCNavJsoupService.parsePagerList(text,1));
+			        } catch (IOException e) {  
+			            // Should never happen!  
+			            throw new RuntimeException(e);  
+			        }   
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/***
+	 * 
+	 * @param params
+	 * @param callback
+	 */
+	@SuppressWarnings("unchecked")
+	@WXModuleAnno(moduleMethod = true, runOnUIThread = true)
+	public void pcmainhead(final String params, final String callback) {
+		Log.d(TAG, "pcmainhead ========" + params);
+		try {
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					mMArticleJson.setList(PCNavJsoupService.parseHomeHeadList(params, 1));
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/***
+	 * 
+	 * @param params
+	 * @param callback
+	 */
+	@SuppressWarnings("unchecked")
+	@WXModuleAnno(moduleMethod = true, runOnUIThread = true)
+	public void pcmainfoot(final String params, final String callback) {
+		Log.d(TAG, "pcmainfoot ========" + params);
+		try {
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					mMArticleJson.setList(PCNavJsoupService.parseFootList(params, 1));
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/***
+	 * 
+	 * @param params
+	 * @param callback
+	 */
+	@SuppressWarnings("unchecked")
+	@WXModuleAnno(moduleMethod = true, runOnUIThread = true)
+	public void pcmainimagelist(final String params, final String callback) {
+		Log.d(TAG, "pcmainimagelist ========" + params);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = JSON.parseObject(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		final String url = jsonObject.getString("url");
+		final int pageNo = jsonObject.getInteger("pageNo");
+		try {
+			doAsync(new CallEarliest<HomeArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<HomeArticleJson>() {
+				@Override
+				public HomeArticleJson call() throws Exception {
+					HomeArticleJson mMArticleJson = new HomeArticleJson();
+					mMArticleJson.setList(PCNavJsoupService.parseHomeList(url, pageNo));
+					return mMArticleJson;
+				}
+			}, new Callback<HomeArticleJson>() {
+				@Override
+				public void onCallback(HomeArticleJson result) {
 					Gson gson = new Gson();
 					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
 				}
