@@ -342,4 +342,50 @@ public class WeexJsoupModule extends WeexBaseJsoupModule {
 			e.printStackTrace();
 		}
 	}
+	
+	/***
+	 * 
+	 * @param params
+	 * @param callback
+	 */
+	@SuppressWarnings("unchecked")
+	@WXModuleAnno(moduleMethod = true, runOnUIThread = true)
+	public void mimagepager(final String params, final String callback) {
+		Log.d(TAG, "mimagelist ========" + params);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = JSON.parseObject(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		final String url = jsonObject.getString("url");
+		final int pageNo = jsonObject.getInteger("pageNo");
+		try {
+			doAsync(new CallEarliest<MArticleJson>() {
+				@Override
+				public void onCallEarliest() throws Exception {
+				}
+			}, new Callable<MArticleJson>() {
+				@Override
+				public MArticleJson call() throws Exception {
+					MArticleJson mMArticleJson = new MArticleJson();
+					if(pageNo==1){
+						mMArticleJson = MArticleJsoupService.parseImagePagerList(url,pageNo);
+					}else{
+						mMArticleJson = new MArticleJson();
+						mMArticleJson.setList(MArticleJsoupService.parseImageList(url,pageNo));
+					}
+					return mMArticleJson;
+				}
+			}, new Callback<MArticleJson>() {
+				@Override
+				public void onCallback(MArticleJson result) {
+					Gson gson = new Gson();
+					WXBridgeManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, gson.toJson(result));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
