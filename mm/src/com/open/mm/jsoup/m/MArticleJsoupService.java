@@ -11,6 +11,7 @@
  */
 package com.open.mm.jsoup.m;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -869,6 +870,105 @@ public class MArticleJsoupService extends CommonService {
 							list.add(sbean);
 						}
 					 
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	public static List<MArticleBean> parsePCSearchList(String href,String keys, int pageNo) {
+		List<MArticleBean> list = new ArrayList<MArticleBean>();
+		try {
+			// href = makeURL(href, new HashMap<String, Object>() {
+			// {
+			// }
+			// });
+			if(pageNo>1){
+				href = UrlUtils.MM_PC_SEARCH_PAGE+keys+"&page="+pageNo;
+			}
+			Document doc;
+//			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			doc = Jsoup.parse(new URL(href).openStream(), "GBK", href);
+			Log.i(TAG, "url = " + href);
+
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			// System.out.println(doc.toString());
+			try {
+				/**
+				 */
+				 Element globalnavElement = doc.select("div.listbox").first();
+				Elements moduleElements = globalnavElement.select("li");
+				if (moduleElements != null && moduleElements.size() > 0) {
+					for (int i = 0; i < moduleElements.size(); i++) {
+							MArticleBean sbean = new MArticleBean();
+							try {
+								try {
+									Element aElement = moduleElements.get(i).select("a").first();
+									if (aElement != null) {
+										String hrefa = aElement.attr("href");
+										Log.i(TAG, "i==" + i + ";hrefa==" + hrefa);
+										sbean.setHref(hrefa);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								try {
+									Element imgElement = moduleElements.get(i).select("img").first();
+									if (imgElement != null) {
+										String src = imgElement.attr("src");
+										Log.i(TAG, "i==" + i + ";src==" + src);
+										sbean.setSrc(src);
+										sbean.setDataimg(src);
+
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								try {
+									Element imgElement = moduleElements.get(i).select("a").get(1);
+									if (imgElement != null) {
+										String alt = imgElement.text();
+										Log.i(TAG, "i==" + i + ";alt==" + alt);
+										if(alt.contains("%u")){
+											alt = EscapeUnescapeUtils.unescape(alt);
+										}
+										sbean.setAlt(alt);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								 
+
+								try {
+									Element imgElement = moduleElements.get(i).select("span.info").first();
+									if (imgElement != null) {
+										String postmeta = imgElement.text();
+										if(postmeta.contains("%u")){
+											postmeta = EscapeUnescapeUtils.unescape(postmeta);
+										}
+										Log.i(TAG, "i==" + i + ";postmeta==" + postmeta);
+										sbean.setPostmeta(postmeta);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							list.add(sbean);
+					}
 				}
 
 			} catch (Exception e) {

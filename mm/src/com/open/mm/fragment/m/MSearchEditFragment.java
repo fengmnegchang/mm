@@ -47,11 +47,11 @@ import com.open.mm.utils.UrlUtils;
  *****************************************************************************************************************************************************************************
  */
 public class MSearchEditFragment extends BaseV4Fragment<CommonJson, MSearchEditFragment> implements OnClickListener{
-	private EditText edit_search;
-	private Button btn_search;
-	private GridView grid_hot;
-	private MSlideMenuAdapter mMSlideMenuAdapter;
-	private List<MSlideMenuBean> list = new ArrayList<MSlideMenuBean>();
+	public EditText edit_search;
+	public Button btn_search;
+	public GridView grid_hot;
+	public MSlideMenuAdapter mMSlideMenuAdapter;
+	public List<MSlideMenuBean> list = new ArrayList<MSlideMenuBean>();
 	
 	public static MSearchEditFragment newInstance(String url, boolean isVisibleToUser) {
 		MSearchEditFragment fragment = new MSearchEditFragment();

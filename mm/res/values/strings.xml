@@ -26,4 +26,6 @@
 	<string name="mm_pc_image_pager_list_desp">mm pc看图pager</string>
 	<string name="mm_weex_main_desp">mm weex main</string>
 	<string name="mm_weex_nav_desp">mm weex  nav</string>
+	<string name="mm_pc_search_keys_desp">mm pc搜索</string>
+	<string name="mm_pc_search_list_desp">mm pc search列表</string>
 </resources>

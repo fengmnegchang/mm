@@ -192,15 +192,29 @@
             android:configChanges="keyboard|keyboardHidden|navigation"
             >
             <intent-filter>
-                 <action android:name="com.taobao.android.intent.action.WEEX"/>
+                 <!-- <action android:name="com.taobao.android.intent.action.WEEX"/> -->
                 <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="com.taobao.android.intent.category.WEEX"/>
+                <!--<category android:name="com.taobao.android.intent.category.WEEX"/>-->
+                <action android:name="com.common.android.mm.intent.action.WEEX"/>
+               <category android:name="com.common.android.mm.intent.category.WEEX"/>
                 <action android:name="android.intent.action.VIEW"/>
                 <data android:scheme="http"/>
                 <data android:scheme="https"/>
                 <data android:scheme="file"/>
                 <data android:scheme="wxpage"/>
             </intent-filter>
+        </activity>
+        <!-- mm pc 搜索-->
+        <activity
+            android:name="com.open.mm.activity.pc.PCSearchKeysFragmentActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_pc_search_keys_desp" >
+        </activity>
+        <!-- mm pc 搜索列表 -->
+        <activity
+            android:name="com.open.mm.activity.pc.PCSearchArticlePullListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:description="@string/mm_pc_search_list_desp" >
         </activity>
         <!-- 所有类列表 -->
         <activity
