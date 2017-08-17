@@ -96,6 +96,7 @@ public class MImagePagerAdapter extends CommonPagerAdapter<MArticleBean>{
 	                	   openbean.setImgsrc(bean.getDataimg());
 	                	   openbean.setUrl(href);
 		       		       openbean.setType(0);
+		       		       openbean.setTypename("0");
 		       		       openbean.setTitle(bean.getAlt());
 	                	   OpenDBService.insert(mContext, openbean);
 	                	   

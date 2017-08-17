@@ -223,6 +223,7 @@ public class MArticlePullListFragmnet extends CommonPullToRefreshListFragment<MA
 			openbean.setUrl(href);
 			openbean.setType(1);
 			openbean.setTitle(bean.getAlt());
+			openbean.setTypename("1");
 			OpenDBService.insert(getActivity(), openbean);
 
 			MImagePullListActivity.startMImagePullListActivity(getActivity(),
