@@ -25,6 +25,7 @@ import com.open.android.module.WeexModalUIModule;
 import com.open.android.module.WeexModule;
 import com.open.mm.module.WeeXEventModule;
 import com.open.mm.module.WeexJsoupModule;
+import com.open.mm.utils.AuthImageDownloader;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
 
@@ -48,11 +49,12 @@ public class MMApplication extends Application {
         ImageLoaderConfiguration configuration =   new ImageLoaderConfiguration.Builder(this).threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator()).diskCacheSize(50 * 1024 * 1024) // 50 Mb
                 .tasksProcessingOrder(QueueProcessingType.LIFO).writeDebugLogs() // Remove for release app
+                .imageDownloader(new AuthImageDownloader(this))
                 .build();
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
         
-        InitConfig config=new InitConfig.Builder().setHttpAdapter(new WXHttpAdapter()).setImgAdapter(new ImageAdapter()).setWebSocketAdapterFactory(new DefaultWebSocketAdapterFactory()).build();
+        InitConfig config=new InitConfig.Builder().setHttpAdapter(new WXHttpAdapter()).setImgAdapter(new ImageAdapter(null)).setWebSocketAdapterFactory(new DefaultWebSocketAdapterFactory()).build();
         WXSDKEngine.initialize(this,config);
         try {
 			WXSDKEngine.registerModule("weexModule", WeexModule.class);

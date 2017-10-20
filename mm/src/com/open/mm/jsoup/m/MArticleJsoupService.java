@@ -101,7 +101,7 @@ public class MArticleJsoupService extends CommonService {
 								try {
 									Element imgElement = moduleElements.get(i).select("img").first();
 									if (imgElement != null) {
-										String src = imgElement.attr("src");
+										String src = imgElement.attr("data-img");
 										Log.i(TAG, "i==" + i + ";src==" + src);
 										sbean.setSrc(src);
 
