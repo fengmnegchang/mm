@@ -71,6 +71,10 @@ public class AuthImageDownloader extends BaseImageDownloader {
     		conn.setRequestProperty("Host", "img2.mm131.com");
     		conn.setRequestProperty("referer", "http://m.mm131.com/");
     		conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36");  
+        }else if(encodedUrl.contains("img1.mm131.me")){
+    		conn.setRequestProperty("Host", "img1.mm131.me");
+    		conn.setRequestProperty("referer", "http://m.mm131.com/");
+    		conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36");  
         }
 		return conn;
 	}

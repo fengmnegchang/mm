@@ -543,9 +543,10 @@ public class MArticleJsoupService extends CommonService {
 				 */
 				/**
 				 * 获取分页信息
+				 * <div class="paging"><span class="rw">1/55页</span><a href="3392_2.html">下一张</a></div>
 				 */
 				try {
-					Element globalnavElement = doc.select("div.fenye").first();
+					Element globalnavElement = doc.select("div.paging").first();
 					if(globalnavElement!=null){
 						Element pElement = globalnavElement.select("span.rw").first();
 						String pager = pElement.text().replace("页", "");
