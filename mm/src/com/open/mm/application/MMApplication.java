@@ -54,7 +54,7 @@ public class MMApplication extends Application {
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
         
-        InitConfig config=new InitConfig.Builder().setHttpAdapter(new WXHttpAdapter()).setImgAdapter(new ImageAdapter(null)).setWebSocketAdapterFactory(new DefaultWebSocketAdapterFactory()).build();
+        InitConfig config=new InitConfig.Builder().setHttpAdapter(new WXHttpAdapter()).setImgAdapter(new ImageAdapter("http://m.mm131.com/")).setWebSocketAdapterFactory(new DefaultWebSocketAdapterFactory()).build();
         WXSDKEngine.initialize(this,config);
         try {
 			WXSDKEngine.registerModule("weexModule", WeexModule.class);
