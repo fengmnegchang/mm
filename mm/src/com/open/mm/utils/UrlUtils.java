@@ -25,6 +25,7 @@ package com.open.mm.utils;
 public class UrlUtils {
 	/** 浏览器代理 **/
 	public static final String userAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36";
+	public static final String userAgentPc ="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
 	/** m mm **/
 	public static final String MM_M = "http://m.mm131.com";
 	/** m mm主页分页 **/

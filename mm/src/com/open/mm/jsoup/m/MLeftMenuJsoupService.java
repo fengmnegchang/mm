@@ -120,7 +120,7 @@ public class MLeftMenuJsoupService extends CommonService {
 			// if (pageNo > 1) {
 			// doc = Jsoup.parse(href);
 			// }else{
-			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			// }
 			Log.i(TAG, "url = " + href);
 

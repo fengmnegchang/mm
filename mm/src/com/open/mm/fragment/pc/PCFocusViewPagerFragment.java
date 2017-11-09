@@ -39,6 +39,7 @@ import com.open.mm.adapter.pc.PCFocusViewPagerAdapter;
 import com.open.mm.bean.m.MArticleBean;
 import com.open.mm.json.m.MArticleJson;
 import com.open.mm.jsoup.pc.PCNavJsoupService;
+import com.open.mm.utils.UrlUtils;
 
 /**
  *****************************************************************************************************************************************************************************
@@ -120,7 +121,8 @@ public class PCFocusViewPagerFragment extends BaseV4Fragment<MArticleJson, PCFoc
 //            String text = new String(buffer, "UTF-8");  
 			
 			URL urll= new URL(url);  
-            HttpURLConnection conn=(HttpURLConnection)urll.openConnection();  
+            HttpURLConnection conn=(HttpURLConnection)urll.openConnection(); 
+            conn.addRequestProperty("User-Agent", UrlUtils.userAgentPc);
             //取得inputStream，并进行读取  
             InputStream input=conn.getInputStream();  
             BufferedReader in=new BufferedReader(new InputStreamReader(input));  

@@ -666,7 +666,7 @@ public class MArticleJsoupService extends CommonService {
 //			}
 //			
 			Document doc;
-			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			Log.i(TAG, "url = " + href);
 
 //			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
@@ -787,7 +787,7 @@ public class MArticleJsoupService extends CommonService {
 			}
 			
 			Document doc;
-			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			Log.i(TAG, "url = " + href);
 
 //			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();

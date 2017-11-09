@@ -65,10 +65,10 @@ public class PCNavJsoupService extends CommonService {
 				}
 			}
 			
-			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			Log.i(TAG, "url = " + href);
 
-//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			// System.out.println(doc.toString());
 			try {
 				/**
@@ -164,10 +164,10 @@ public class PCNavJsoupService extends CommonService {
 			// }
 			// });
 			Document doc;
-			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			Log.i(TAG, "url = " + href);
 
-//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			// System.out.println(doc.toString());
 			
 			try {
@@ -282,10 +282,10 @@ public class PCNavJsoupService extends CommonService {
 			// }
 			// });
 			Document doc;
-			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			Log.i(TAG, "url = " + href);
 
-//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			// System.out.println(doc.toString());
 			try {
 				/**
@@ -354,7 +354,7 @@ public class PCNavJsoupService extends CommonService {
 			doc = Jsoup.parse(href);
 			Log.i(TAG, "url = " + href);
 
-//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			// System.out.println(doc.toString());
 			try {
 				/**
@@ -436,9 +436,9 @@ public class PCNavJsoupService extends CommonService {
 			// }
 			// });
 			Document doc;
-			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			Log.i(TAG, "url = " + href);
-//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			// System.out.println(doc.toString());
 			try {
 				 Element globalnavElement = doc.select("div.main-left").first();
@@ -525,7 +525,7 @@ public class PCNavJsoupService extends CommonService {
 			// }
 			// });
 			Log.i(TAG, "url = " + href);
-			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			// System.out.println(doc.toString());
 			try {
 				/**
@@ -605,11 +605,11 @@ public class PCNavJsoupService extends CommonService {
 			// }
 			// });
 			Document doc;
-//			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+//			doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			doc = Jsoup.parse(new URL(href).openStream(), "GBK", href);
 			Log.i(TAG, "url = " + href);
 
-//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgent).timeout(10000).get();
+//			Document doc = Jsoup.connect(href).userAgent(UrlUtils.userAgentPc).timeout(10000).get();
 			// System.out.println(doc.toString());
 			
 			try {
