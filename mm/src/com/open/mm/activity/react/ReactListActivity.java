@@ -128,7 +128,7 @@ public class ReactListActivity extends AppCompatActivity {
 //	}
 
 	public void reactlist() {
-		String path = "http://192.168.1.15:8081/reactmm.json";
+		String path = "http://192.168.1.5:8081/reactmm.json";
 		 HttpURLConnection conn;
 		try {
 			conn = (HttpURLConnection) new URL(path).openConnection();

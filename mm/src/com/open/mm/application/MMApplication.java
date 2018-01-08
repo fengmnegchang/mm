@@ -32,6 +32,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.open.android.react.packages.CommonReactPackage;
 import com.open.mm.react.packages.MMReactPackage;
+import com.open.mm.utils.AuthImageDownloader;
 
 /**
  *****************************************************************************************************************************************************************************
@@ -54,6 +55,7 @@ public class MMApplication extends Application {
         ImageLoaderConfiguration configuration =   new ImageLoaderConfiguration.Builder(this).threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator()).diskCacheSize(50 * 1024 * 1024) // 50 Mb
                 .tasksProcessingOrder(QueueProcessingType.LIFO).writeDebugLogs() // Remove for release app
+                .imageDownloader(new AuthImageDownloader(this))
                 .build();
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
